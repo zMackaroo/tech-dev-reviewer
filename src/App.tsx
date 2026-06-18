@@ -19,6 +19,7 @@ import {
   AgenticDevPage,
   TestingPage,
 } from "./pages/TopicPages";
+import { CodingPracticePage } from "./pages/CodingPracticePage";
 import { DEFAULT_SECTION, sectionToPath } from "./routes";
 import "./App.css";
 
@@ -60,6 +61,7 @@ function App() {
           <Route path="/testing" element={<TestingPage />} />
           <Route path="/cicd" element={<CICDPage />} />
           <Route path="/design-systems" element={<DesignSystemsPage />} />
+          <Route path="/coding-practice" element={<CodingPracticePage />} />
           <Route
             path="*"
             element={<Navigate to={sectionToPath(DEFAULT_SECTION)} replace />}

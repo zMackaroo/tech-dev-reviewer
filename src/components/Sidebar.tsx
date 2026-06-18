@@ -17,6 +17,10 @@ const NAV_GROUPS: {
   //   items: [{ id: 'role-study', label: 'My Role' }],
   // },
   {
+    label: "Practice",
+    items: [{ id: "coding-practice", label: "Coding Practice" }],
+  },
+  {
     label: "Leadership & AI",
     items: [
       { id: "senior-lead", label: "Senior Lead" },

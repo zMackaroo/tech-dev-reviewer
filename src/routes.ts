@@ -18,6 +18,7 @@ export const SECTION_PATHS: Record<NavSection, string> = {
   testing: '/testing',
   cicd: '/cicd',
   'design-systems': '/design-systems',
+  'coding-practice': '/coding-practice',
 }
 
 export function sectionToPath(section: NavSection): string {

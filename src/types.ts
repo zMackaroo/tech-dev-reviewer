@@ -14,6 +14,7 @@ export type NavSection =
   | 'testing'
   | 'cicd'
   | 'design-systems'
+  | 'coding-practice'
 
 export interface InterviewQuestion {
   id: number

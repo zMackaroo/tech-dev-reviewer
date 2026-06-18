@@ -14,7 +14,7 @@ import { designSystemsQuestions, designSystemsCategories } from './design-system
 import { seniorLeadQuestions, seniorLeadCategories } from './senior-lead'
 import { agenticQuestions, agenticCategories } from './agentic'
 
-export type ReviewerSection = Exclude<NavSection, 'role-study'>
+export type ReviewerSection = Exclude<NavSection, 'role-study' | 'coding-practice'>
 
 export interface SectionMeta {
   id: ReviewerSection
