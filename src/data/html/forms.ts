@@ -5,7 +5,7 @@ export const formsQuestions: InterviewQuestion[] = [
     id: 28,
     category: 'Forms',
     question: 'What is the purpose of the form element?',
-    answer: 'The form element wraps interactive controls that collect and submit user input to a server or JavaScript handler. It defines the submission endpoint via action, the HTTP method via method, and groups inputs that are sent together as name-value pairs. Forms are the accessible, progressive-enhancement-friendly way to gather data even when JavaScript enhances the experience. For example, a login form submits email and password fields to /api/login without requiring a client-side framework. In a real app, forms work without JavaScript for baseline functionality while React or Vue intercept submit events for SPA navigation.',
+    answer: 'The form element wraps interactive controls that collect and submit user input to a server or JavaScript handler. It defines the submission endpoint via action, the HTTP method via method, and groups inputs that are sent together as name-value pairs. Forms are the accessible, progressive-enhancement-friendly way to gather data even when JavaScript enhances the experience.',
     code: `<form action="/api/login" method="post">
   <label for="email">Email</label>
   <input type="email" id="email" name="email" required />
@@ -20,7 +20,7 @@ export const formsQuestions: InterviewQuestion[] = [
     id: 29,
     category: 'Forms',
     question: 'What are the most important HTML input types?',
-    answer: 'HTML5 input types provide built-in validation, appropriate mobile keyboards, and semantic meaning beyond plain text. Common types include email, password, number, tel, url, date, checkbox, radio, file, search, and hidden. Each type changes browser behavior — email validates format, number shows steppers, and date opens a native picker on supported devices. For example, type="tel" on iOS shows a numeric phone keypad instead of the full keyboard. In a real app, choosing the correct input type reduces custom validation code and improves mobile UX for checkout and signup flows.',
+    answer: 'HTML5 input types provide built-in validation, appropriate mobile keyboards, and semantic meaning beyond plain text. Common types include email, password, number, tel, url, date, checkbox, radio, file, search, and hidden. Each type changes browser behavior — email validates format, number shows steppers, and date opens a native picker on supported devices.',
     code: `<form>
   <input type="email" name="email" placeholder="Email" required />
   <input type="password" name="password" minlength="8" required />
@@ -34,7 +34,7 @@ export const formsQuestions: InterviewQuestion[] = [
     id: 30,
     category: 'Forms',
     question: 'How do you properly associate labels with form controls?',
-    answer: 'Every form control should have an accessible name, most reliably provided by a label element linked via the for attribute matching the input id. Alternatively, wrap the input inside the label so association is implicit. Placeholder text is not a substitute for labels because it disappears on input and is often skipped by screen readers as the primary name. For example, <label for="username">Username</label><input id="username"> ensures clicking the label focuses the field. In a real app, design system FormField components generate matching id and htmlFor pairs automatically to meet WCAG requirements.',
+    answer: 'Every form control should have an accessible name, most reliably provided by a label element linked via the for attribute matching the input id. Alternatively, wrap the input inside the label so association is implicit. Placeholder text is not a substitute for labels because it disappears on input and is often skipped by screen readers as the primary name.',
     code: `<!-- Explicit association (preferred) -->
 <label for="username">Username</label>
 <input type="text" id="username" name="username" autocomplete="username" />
@@ -56,7 +56,7 @@ export const formsQuestions: InterviewQuestion[] = [
     id: 31,
     category: 'Forms',
     question: 'When should you use textarea instead of input?',
-    answer: 'Use textarea for multi-line plain text input such as comments, descriptions, or message bodies, while input type="text" handles single-line values like names or search queries. Textarea supports the rows and cols attributes for default size and accepts raw text including line breaks. Unlike input, textarea content goes between opening and closing tags as default value. For example, a support ticket form uses textarea for the message body and input for the subject line. In a real app, character counters and auto-resize behaviors are added with JavaScript but the base textarea works without scripts.',
+    answer: 'Use textarea for multi-line plain text input such as comments, descriptions, or message bodies, while input type="text" handles single-line values like names or search queries. Textarea supports the rows and cols attributes for default size and accepts raw text including line breaks. Unlike input, textarea content goes between opening and closing tags as default value.',
     code: `<label for="message">Your message</label>
 <textarea
   id="message"
@@ -72,7 +72,7 @@ export const formsQuestions: InterviewQuestion[] = [
     id: 32,
     category: 'Forms',
     question: 'How do select and option elements work?',
-    answer: 'The select element presents a dropdown (or listbox with the multiple attribute) of options the user can choose from. Each option has a value submitted with the form and optional display text between tags. The selected attribute marks the default choice, and optgroup groups related options under a label. For example, a country picker uses option value="US">United States</option> for compact submission values with readable labels. In a real app, long option lists may be replaced by searchable combobox components, but native select remains the accessible fallback.',
+    answer: 'The select element presents a dropdown (or listbox with the multiple attribute) of options the user can choose from. Each option has a value submitted with the form and optional display text between tags. The selected attribute marks the default choice, and optgroup groups related options under a label.',
     code: `<label for="country">Country</label>
 <select id="country" name="country" required>
   <option value="">Select a country</option>
@@ -90,7 +90,7 @@ export const formsQuestions: InterviewQuestion[] = [
     id: 33,
     category: 'Forms',
     question: 'What are fieldset and legend used for?',
-    answer: 'Fieldset groups related form controls into a semantic unit, and legend provides an accessible name for that group announced by screen readers. They are essential for radio button groups and checkbox clusters where individual labels are not enough context. Disabled fieldset disables all nested controls at once. For example, a shipping method choice wraps three radio inputs in one fieldset with legend "Delivery speed". In a real app, payment method sections and address sub-forms use fieldset/legend to meet accessibility guidelines for grouped inputs.',
+    answer: 'Fieldset groups related form controls into a semantic unit, and legend provides an accessible name for that group announced by screen readers. They are essential for radio button groups and checkbox clusters where individual labels are not enough context. Disabled fieldset disables all nested controls at once.',
     code: `<fieldset>
   <legend>Shipping method</legend>
 
@@ -109,7 +109,7 @@ export const formsQuestions: InterviewQuestion[] = [
     id: 34,
     category: 'Forms',
     question: 'What HTML validation attributes are available on inputs?',
-    answer: 'HTML5 provides built-in constraint validation attributes that browsers enforce before form submission: required, min, max, minlength, maxlength, pattern, and type-specific rules like email format. The novalidate attribute on form disables native validation when you handle it in JavaScript. Invalid fields match :invalid CSS and fire constraint validation APIs. For example, pattern="[0-9]{5}" validates a five-digit ZIP code without custom JavaScript. In a real app, native validation provides instant feedback while server-side validation remains mandatory for security.',
+    answer: 'HTML5 provides built-in constraint validation attributes that browsers enforce before form submission: required, min, max, minlength, maxlength, pattern, and type-specific rules like email format. The novalidate attribute on form disables native validation when you handle it in JavaScript. Invalid fields match :invalid CSS and fire constraint validation APIs.',
     code: `<form>
   <input type="text" name="username" required minlength="3" maxlength="20" />
 
@@ -130,7 +130,7 @@ export const formsQuestions: InterviewQuestion[] = [
     id: 35,
     category: 'Forms',
     question: 'What is the autocomplete attribute and why use it?',
-    answer: 'The autocomplete attribute hints to browsers which type of data a field expects, enabling autofill from saved profiles and password managers. Standard tokens like name, email, current-password, and street-address follow the WHATWG spec so Chrome, Safari, and Firefox fill consistently. Setting autocomplete="off" on sensitive or non-standard fields prevents incorrect suggestions. For example, autocomplete="shipping address-line1" helps checkout forms populate address fields in one tap. In a real app, correct autocomplete tokens dramatically reduce form abandonment on mobile signup and payment flows.',
+    answer: 'The autocomplete attribute hints to browsers which type of data a field expects, enabling autofill from saved profiles and password managers. Standard tokens like name, email, current-password, and street-address follow the WHATWG spec so Chrome, Safari, and Firefox fill consistently. Setting autocomplete="off" on sensitive or non-standard fields prevents incorrect suggestions.',
     code: `<form autocomplete="on">
   <input type="text" name="name" autocomplete="name" />
   <input type="email" name="email" autocomplete="email" />
@@ -145,7 +145,7 @@ export const formsQuestions: InterviewQuestion[] = [
     id: 36,
     category: 'Forms',
     question: 'What are the different button types in HTML forms?',
-    answer: 'Buttons inside forms have a type attribute that controls behavior: submit sends the form, reset clears fields to defaults, and button performs no default form action (for JavaScript handlers). If type is omitted, buttons default to submit, which can accidentally trigger submission when placed inside a form. Use button type="button" for actions like toggling UI that should not submit. For example, a "Cancel" control uses type="button" while "Save" uses type="submit". In a real app, modal dialogs with forms always set explicit button types to prevent unintended double submissions.',
+    answer: 'Buttons inside forms have a type attribute that controls behavior: submit sends the form, reset clears fields to defaults, and button performs no default form action (for JavaScript handlers). If type is omitted, buttons default to submit, which can accidentally trigger submission when placed inside a form. Use button type="button" for actions like toggling UI that should not submit.',
     code: `<form action="/profile" method="post">
   <input type="text" name="display-name" />
 
@@ -158,7 +158,7 @@ export const formsQuestions: InterviewQuestion[] = [
     id: 37,
     category: 'Forms',
     question: 'How do form action and method attributes work?',
-    answer: 'The action attribute specifies the URL where form data is sent on submission, and method defines the HTTP verb — typically get for searches or post for mutations. With method="get", field values append as query string parameters; with post, they go in the request body. Enctype defaults to application/x-www-form-urlencoded but must be multipart/form-data for file uploads. For example, a search form uses action="/search" method="get" so results are bookmarkable with ?q=term. In a real app, SPAs often use action="#" and preventDefault while still using semantic form markup for accessibility.',
+    answer: 'The action attribute specifies the URL where form data is sent on submission, and method defines the HTTP verb — typically get for searches or post for mutations. With method="get", field values append as query string parameters; with post, they go in the request body. Enctype defaults to application/x-www-form-urlencoded but must be multipart/form-data for file uploads.',
     code: `<!-- GET: values appear in URL -->
 <form action="/search" method="get">
   <input type="search" name="q" />
@@ -176,7 +176,7 @@ export const formsQuestions: InterviewQuestion[] = [
     id: 38,
     category: 'Forms',
     question: 'What is enctype and when do you need multipart/form-data?',
-    answer: 'The enctype attribute sets the Content-Type of the submitted form data. The default application/x-www-form-urlencoded URL-encodes key-value pairs for typical text inputs. multipart/form-data is required when uploading files because binary data cannot be safely URL-encoded in a single string. Each part of a multipart body carries one field or file with its own headers. For example, a profile photo upload form must set enctype="multipart/form-data" and include input type="file". In a real app, API routes parse multipart bodies with libraries like multer or native FormData on the client.',
+    answer: 'The enctype attribute sets the Content-Type of the submitted form data. The default application/x-www-form-urlencoded URL-encodes key-value pairs for typical text inputs. multipart/form-data is required when uploading files because binary data cannot be safely URL-encoded in a single string. Each part of a multipart body carries one field or file with its own headers.',
     code: `<form
   action="/api/upload"
   method="post"
@@ -195,7 +195,7 @@ export const formsQuestions: InterviewQuestion[] = [
     id: 39,
     category: 'Forms',
     question: 'How do datalist elements enhance input fields?',
-    answer: 'Datalist provides suggested values for an input without restricting the user to a fixed dropdown like select. The list attribute on input references a datalist by id, showing autocomplete suggestions while still allowing free text entry. Each option in datalist can have a value and optional label. For example, an input list="cities" suggests common cities but accepts custom entries for unlisted locations. In a real app, datalist works well for tags, known product SKUs, or recent search terms where full combobox widgets would be heavier than needed.',
+    answer: 'Datalist provides suggested values for an input without restricting the user to a fixed dropdown like select. The list attribute on input references a datalist by id, showing autocomplete suggestions while still allowing free text entry. Each option in datalist can have a value and optional label.',
     code: `<label for="city">City</label>
 <input type="text" id="city" name="city" list="city-list" />
 

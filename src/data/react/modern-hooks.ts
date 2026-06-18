@@ -5,8 +5,7 @@ export const modernHooksQuestions: InterviewQuestion[] = [
     id: 101,
     category: 'Modern Hooks',
     question: 'What is the React use() hook?',
-    answer:
-      'The use() hook reads the value of a resource during render — either a Promise or a Context object — and integrates with Suspense to pause rendering until async data resolves. Unlike useEffect, it can be called conditionally after early returns, which is an intentional exception to the Rules of Hooks for this API only. When the Promise rejects, the nearest error boundary catches it; when it resolves, React continues rendering with the unwrapped value. This matters in React 19 because it replaces many patterns where you fetched in useEffect and stored results in useState. For example, a profile page can call const user = use(fetchUser(id)) inside a component wrapped by Suspense instead of wiring loading flags manually. In a real app, use() also reads context conditionally — const theme = use(ThemeContext) — only when a feature flag enables themed UI.',
+    answer: 'The use() hook reads the value of a resource during render — either a Promise or a Context object — and integrates with Suspense to pause rendering until async data resolves. Unlike useEffect, it can be called conditionally after early returns, which is an intentional exception to the Rules of Hooks for this API only. When the Promise rejects, the nearest error boundary catches it; when it resolves, React continues rendering with the unwrapped value.',
     code: `import { use, Suspense } from "react";
 
 function UserProfile({ userPromise }) {
@@ -23,8 +22,7 @@ function UserProfile({ userPromise }) {
     id: 102,
     category: 'Modern Hooks',
     question: 'What is useActionState?',
-    answer:
-      'useActionState (formerly useFormState in early React 19 betas) manages state returned from an async action function, typically a form submission or Server Action. It returns a tuple of [state, formAction, isPending] so you get the latest result, a wrapped action to pass to a form, and built-in pending status without extra useState boilerplate. The action receives the previous state as its first argument, then the form payload, making multi-step or error-retry flows straightforward. This matters because forms are one of the most common async UI patterns and previously required manual loading and error wiring. For example, a signup form action might return { errors: { email: "Taken" } } and the component re-renders with field errors automatically. In a real app with Next.js, you pass a server action marked "use server" directly to useActionState for progressive enhancement without client-side fetch glue.',
+    answer: 'useActionState (formerly useFormState in early React 19 betas) manages state returned from an async action function, typically a form submission or Server Action. It returns a tuple of [state, formAction, isPending] so you get the latest result, a wrapped action to pass to a form, and built-in pending status without extra useState boilerplate. The action receives the previous state as its first argument, then the form payload, making multi-step or error-retry flows straightforward.',
     code: `"use client";
 import { useActionState } from "react";
 
@@ -50,8 +48,7 @@ function ProfileForm() {
     id: 103,
     category: 'Modern Hooks',
     question: 'What is useFormStatus?',
-    answer:
-      'useFormStatus reads the submission status of the nearest parent <form> that is being processed by a React Action, without prop drilling pending state from the submit button component. It returns { pending, data, method, action } so child components like a SubmitButton or FormSpinner can disable themselves or show loading UI automatically. The hook must be used in a component rendered inside the form — it cannot be called in the same component that owns the form action in some setups, which is why teams extract a SubmitButton child. This matters for accessible, composable form design where multiple nested controls need to react to submission state. For example, a design-system Button inside a checkout form calls const { pending } = useFormStatus() to show a spinner without the page passing isLoading props through layout wrappers. In a real app, pairing useFormStatus with useActionState gives parent-level result state and child-level pending UI with minimal code.',
+    answer: 'useFormStatus reads the submission status of the nearest parent <form> that is being processed by a React Action, without prop drilling pending state from the submit button component. It returns { pending, data, method, action } so child components like a SubmitButton or FormSpinner can disable themselves or show loading UI automatically. The hook must be used in a component rendered inside the form — it cannot be called in the same component that owns the form action in some setups, which is why teams extract a SubmitButton child.',
     code: `"use client";
 import { useFormStatus } from "react-dom";
 
@@ -78,8 +75,7 @@ function LoginForm({ action }) {
     id: 104,
     category: 'Modern Hooks',
     question: 'What is useOptimistic?',
-    answer:
-      'useOptimistic lets you show an optimistic UI update immediately while an async action is in flight, then automatically revert or reconcile when the server responds. It returns [optimisticState, addOptimistic] where addOptimistic applies a temporary update that React rolls back if the action fails. This is cleaner than manually cloning state, applying a fake update, and undoing on error in useEffect. It pairs naturally with Server Actions, transitions, and lists where users expect instant feedback. For example, a message thread can append a sent message optimistically before the API confirms persistence, so the chat feels instant. In a real app, a kanban board might call addOptimistic to move a card column immediately while useActionState persists the change on the server.',
+    answer: 'useOptimistic lets you show an optimistic UI update immediately while an async action is in flight, then automatically revert or reconcile when the server responds. It returns [optimisticState, addOptimistic] where addOptimistic applies a temporary update that React rolls back if the action fails. This is cleaner than manually cloning state, applying a fake update, and undoing on error in useEffect. It pairs naturally with Server Actions, transitions, and lists where users expect instant feedback.',
     code: `"use client";
 import { useOptimistic, useTransition } from "react";
 
@@ -107,8 +103,7 @@ function MessageList({ messages, sendAction }) {
     id: 105,
     category: 'Modern Hooks',
     question: 'What is useInsertionEffect?',
-    answer:
-      'useInsertionEffect runs synchronously before useLayoutEffect and before the browser paints, specifically for injecting styles into the DOM from CSS-in-JS libraries. It fires after DOM mutations but before layout reads, giving libraries a safe place to insert <style> tags without triggering layout thrashing. Unlike useEffect, it must not read layout or schedule updates — it is only for DOM insertions that affect styling. This matters when using styled-components, Emotion, or custom design-system providers that inject dynamic rules at runtime. For example, a theme provider might call useInsertionEffect to insert token-based CSS variables before children measure their layout. In a real app, you rarely write this hook yourself unless building a styling library — but understanding it explains why CSS-in-JS integrates differently from plain useEffect.',
+    answer: 'useInsertionEffect runs synchronously before useLayoutEffect and before the browser paints, specifically for injecting styles into the DOM from CSS-in-JS libraries. It fires after DOM mutations but before layout reads, giving libraries a safe place to insert <style> tags without triggering layout thrashing. Unlike useEffect, it must not read layout or schedule updates — it is only for DOM insertions that affect styling.',
     code: `useInsertionEffect(() => {
   // Inject styles before layout/paint — CSS-in-JS libraries
   const style = document.createElement("style");
@@ -124,8 +119,7 @@ function MessageList({ messages, sendAction }) {
     id: 106,
     category: 'Modern Hooks',
     question: 'What is useEffectEvent?',
-    answer:
-      'useEffectEvent (React 19.2+) returns a stable function reference that always sees the latest props and state when invoked, without needing to list those values in a useEffect dependency array. It solves the stale closure problem for effect callbacks that should not re-subscribe when unrelated values change — like an analytics handler that needs the latest userId but should not re-run setup on every render. You define the event handler with useEffectEvent and call it from inside useEffect with a minimal dependency list. This matters because exhaustive-deps often forces effects to re-run too often or forces developers to disable the lint rule. For example, a WebSocket effect connects once on mount but messages call onMessage(latestFilters) with current filter state without reconnecting when filters change. In a real app, useEffectEvent reduces effect churn for chat rooms, media players, and third-party SDK integrations.',
+    answer: 'useEffectEvent (React 19.2+) returns a stable function reference that always sees the latest props and state when invoked, without needing to list those values in a useEffect dependency array. It solves the stale closure problem for effect callbacks that should not re-subscribe when unrelated values change — like an analytics handler that needs the latest userId but should not re-run setup on every render. You define the event handler with useEffectEvent and call it from inside useEffect with a minimal dependency list.',
     code: `function ChatRoom({ roomId, theme }) {
   const onMessage = useEffectEvent((msg) => {
     log(msg, theme); // always latest theme — not a dep of effect below
@@ -143,8 +137,7 @@ function MessageList({ messages, sendAction }) {
     id: 107,
     category: 'Modern Hooks',
     question: 'How do useActionState and useFormStatus work together?',
-    answer:
-      'useActionState owns the async action, returned state, and top-level isPending flag at the form level, while useFormStatus lets deeply nested submit controls read pending status from that same form without props. The form passes action={formAction} from useActionState, and child components like buttons or fieldsets call useFormStatus to disable inputs or show spinners during submission. Together they replace the common pattern of lifting isSubmitting state and drilling it into every interactive child. This matters for large forms with design-system components that should stay dumb and reusable. For example, a multi-step checkout form keeps server validation errors in useActionState state while each step\'s Continue button uses useFormStatus independently. In a real app, the parent handles { errors, success } from the action result and children only care whether submission is in flight.',
+    answer: 'useActionState owns the async action, returned state, and top-level isPending flag at the form level, while useFormStatus lets deeply nested submit controls read pending status from that same form without props. The form passes action={formAction} from useActionState, and child components like buttons or fieldsets call useFormStatus to disable inputs or show spinners during submission. Together they replace the common pattern of lifting isSubmitting state and drilling it into every interactive child.',
     code: `function CheckoutForm() {
   const [state, action, isPending] = useActionState(checkoutAction, null);
 
@@ -162,8 +155,7 @@ function MessageList({ messages, sendAction }) {
     id: 108,
     category: 'Modern Hooks',
     question: 'When should you use useOptimistic vs useTransition?',
-    answer:
-      'useTransition marks state updates as low priority so React keeps the UI responsive during expensive re-renders — it does not fake data, it defers work. useOptimistic temporarily shows predicted data before the server confirms it, then reconciles when the async action completes. Use startTransition when the slowdown is rendering or filtering large local state, and useOptimistic when users expect immediate feedback for mutations like likes, sends, or drag-and-drop. They can be combined: startTransition wraps the async call while addOptimistic applies the instant UI change. This matters because picking the wrong tool either leaves the UI feeling sluggish or shows incorrect state without a rollback story. For example, typing in a search box uses useDeferredValue or useTransition, while adding a todo item uses useOptimistic to show it in the list immediately. In a real app, a social feed might optimistic-add a post and useTransition to defer re-sorting the heavy timeline.',
+    answer: 'useTransition marks state updates as low priority so React keeps the UI responsive during expensive re-renders — it does not fake data, it defers work. useOptimistic temporarily shows predicted data before the server confirms it, then reconciles when the async action completes. Use startTransition when the slowdown is rendering or filtering large local state, and useOptimistic when users expect immediate feedback for mutations like likes, sends, or drag-and-drop. They can be combined: startTransition wraps the async call while addOptimistic applies the instant UI change.',
     code: `// useTransition — defer expensive render, same data timing
 startTransition(() => setFilter(query));
 
@@ -176,8 +168,7 @@ await createComment(text);`,
     id: 109,
     category: 'Modern Hooks',
     question: 'How does use() integrate with Suspense and error boundaries?',
-    answer:
-      'When use() receives a pending Promise, React suspends the component and renders the nearest Suspense fallback until the Promise settles, similar to lazy-loaded components or React Query suspense mode. If the Promise rejects, React propagates the error to the nearest error boundary instead of returning undefined to your component. This creates a declarative async rendering model where loading and error UI live at the boundary level rather than inside every leaf component. It matters because it reduces branching on isLoading and error flags scattered through the tree. For example, a dashboard wraps each widget in Suspense while each widget calls use(dataPromise) for its own endpoint. In a real app with Next.js, you might pass a cached promise from a Server Component to a Client Component that unwraps it with use(), keeping fetch on the server and interactivity on the client.',
+    answer: 'When use() receives a pending Promise, React suspends the component and renders the nearest Suspense fallback until the Promise settles, similar to lazy-loaded components or React Query suspense mode. If the Promise rejects, React propagates the error to the nearest error boundary instead of returning undefined to your component. This creates a declarative async rendering model where loading and error UI live at the boundary level rather than inside every leaf component. It matters because it reduces branching on isLoading and error flags scattered through the tree.',
     code: `function Widget({ dataPromise }) {
   const data = use(dataPromise); // suspends or throws
   return <Chart values={data} />;
@@ -194,8 +185,7 @@ await createComment(text);`,
     id: 110,
     category: 'Modern Hooks',
     question: 'What is the modern React hooks landscape (React 18–19)?',
-    answer:
-      'React 18 added concurrent hooks — useTransition, useDeferredValue, useId, useSyncExternalStore, and useInsertionEffect — focused on responsiveness, SSR safety, and external stores. React 19 added use, useActionState, useFormStatus, and useOptimistic for async actions, forms, and optimistic mutations, plus ref-as-prop and Actions that reduce forwardRef and manual pending-state boilerplate. React 19.2 added useEffectEvent to simplify effect dependencies for event-like callbacks. Together these hooks push data fetching and mutations toward declarative patterns with Suspense and Server Actions instead of useEffect plus useState for every async path. This matters in interviews because teams on React 19 expect familiarity with the form/action hooks, not just the React 16–17 core set. For example, a greenfield Next.js 15 app might use useActionState for mutations, use() for reading server-fetched promises, and useOptimistic for comment threads — with useEffect reserved for true external subscriptions.',
+    answer: 'React 18 added concurrent hooks — useTransition, useDeferredValue, useId, useSyncExternalStore, and useInsertionEffect — focused on responsiveness, SSR safety, and external stores. React 19 added use, useActionState, useFormStatus, and useOptimistic for async actions, forms, and optimistic mutations, plus ref-as-prop and Actions that reduce forwardRef and manual pending-state boilerplate. React 19.2 added useEffectEvent to simplify effect dependencies for event-like callbacks. Together these hooks push data fetching and mutations toward declarative patterns with Suspense and Server Actions instead of useEffect plus useState for every async path.',
     code: `// React 18 concurrent
 useTransition, useDeferredValue, useId, useSyncExternalStore
 

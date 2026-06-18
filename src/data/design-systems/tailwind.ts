@@ -5,7 +5,7 @@ export const tailwindQuestions: InterviewQuestion[] = [
     id: 52,
     category: 'Tailwind CSS',
     question: 'What is utility-first CSS and why does Tailwind use it?',
-    answer: 'Utility-first CSS applies small, single-purpose classes directly in HTML instead of writing custom CSS rules for each element. Tailwind provides utilities like flex, pt-4, text-center, and bg-blue-500 that compose visually without leaving your markup. This eliminates inventing class names, reduces context-switching between HTML and CSS files, and keeps styling colocated with structure. The approach trades larger HTML class lists for faster development and consistent design tokens. In a real app, a card is styled with rounded-lg shadow-md p-6 bg-white instead of a bespoke .card CSS class.',
+    answer: 'Utility-first CSS applies small, single-purpose classes directly in HTML instead of writing custom CSS rules for each element. Tailwind provides utilities like flex, pt-4, text-center, and bg-blue-500 that compose visually without leaving your markup. This eliminates inventing class names, reduces context-switching between HTML and CSS files, and keeps styling colocated with structure. The approach trades larger HTML class lists for faster development and consistent design tokens.',
     code: `<!-- Utility-first: compose styles in markup -->
 <div class="rounded-lg shadow-md p-6 bg-white max-w-sm">
   <h2 class="text-xl font-semibold text-gray-900">Product Name</h2>
@@ -19,7 +19,7 @@ export const tailwindQuestions: InterviewQuestion[] = [
     id: 53,
     category: 'Tailwind CSS',
     question: 'How does tailwind.config.js work?',
-    answer: 'The Tailwind config file customizes the design system — colors, spacing, fonts, breakpoints, plugins, and content paths for purging unused CSS. The theme section extends or overrides default tokens so bg-brand maps to your primary color. The content array tells Tailwind which files to scan for class names during the build. Plugins add new utilities, components, or variants like @tailwindcss/forms. In a real app, extending theme.colors with brand: { DEFAULT: \'#2563eb\' } lets you use bg-brand throughout the project.',
+    answer: 'The Tailwind config file customizes the design system — colors, spacing, fonts, breakpoints, plugins, and content paths for purging unused CSS. The theme section extends or overrides default tokens so bg-brand maps to your primary color. The content array tells Tailwind which files to scan for class names during the build. Plugins add new utilities, components, or variants like @tailwindcss/forms.',
     code: `// tailwind.config.js
 export default {
   content: ['./src/**/*.{js,ts,jsx,tsx}'],
@@ -40,7 +40,7 @@ export default {
     id: 54,
     category: 'Tailwind CSS',
     question: 'What is the @apply directive?',
-    answer: '@apply lets you compose utility classes into a reusable CSS class within a @layer components or @layer utilities block. It extracts repeated utility combinations into a named class while still using Tailwind\'s design tokens. This is useful when the same utility pattern appears dozens of times and a component class improves readability. However, overusing @apply defeats the utility-first purpose — prefer utilities inline for one-off styles. In a real app, .btn-primary { @apply px-4 py-2 bg-brand text-white rounded-md hover:bg-brand-dark; } centralizes button styling.',
+    answer: '@apply lets you compose utility classes into a reusable CSS class within a @layer components or @layer utilities block. It extracts repeated utility combinations into a named class while still using Tailwind\'s design tokens. This is useful when the same utility pattern appears dozens of times and a component class improves readability. However, overusing @apply defeats the utility-first purpose — prefer utilities inline for one-off styles.',
     code: `/* styles/components.css */
 @layer components {
   .btn-primary {
@@ -57,7 +57,7 @@ export default {
     id: 55,
     category: 'Tailwind CSS',
     question: 'How does Tailwind\'s JIT (Just-In-Time) compiler work?',
-    answer: 'The JIT engine generates CSS on demand by scanning source files for class names at build time instead of shipping a massive pre-built stylesheet. Only classes you actually use appear in the final CSS bundle, keeping production files small. JIT also enables arbitrary values like w-[137px] and bg-[#1da1f2] without config changes. It replaced the older PurgeCSS approach and is the default engine in Tailwind v3+. In a real app, using w-[137px] generates exactly that one utility rule instead of including every possible width from a preset scale.',
+    answer: 'The JIT engine generates CSS on demand by scanning source files for class names at build time instead of shipping a massive pre-built stylesheet. Only classes you actually use appear in the final CSS bundle, keeping production files small. JIT also enables arbitrary values like w-[137px] and bg-[#1da1f2] without config changes. It replaced the older PurgeCSS approach and is the default engine in Tailwind v3+.',
     code: `<!-- Arbitrary values (JIT generates on demand) -->
 <div class="w-[137px] top-[117px] bg-[#1da1f2]">
   Custom dimensions
@@ -71,7 +71,7 @@ export default {
     id: 56,
     category: 'Tailwind CSS',
     question: 'How do you implement dark mode in Tailwind?',
-    answer: 'Tailwind supports dark mode via the darkMode config set to "media" (follows prefers-color-scheme) or "class" (toggles via a .dark class on html or body). With class strategy, JavaScript toggles the dark class and all dark: prefixed utilities activate. Define paired light and dark utilities like bg-white dark:bg-gray-900 on the same element. The class strategy gives users manual control independent of OS settings. In a real app, adding class="dark" to html switches every dark:text-gray-100 and dark:bg-gray-900 utility across the entire site.',
+    answer: 'Tailwind supports dark mode via the darkMode config set to "media" (follows prefers-color-scheme) or "class" (toggles via a .dark class on html or body). With class strategy, JavaScript toggles the dark class and all dark: prefixed utilities activate. Define paired light and dark utilities like bg-white dark:bg-gray-900 on the same element. The class strategy gives users manual control independent of OS settings.',
     code: `// tailwind.config.js
 export default { darkMode: 'class' };
 
@@ -88,7 +88,7 @@ export default { darkMode: 'class' };
     id: 57,
     category: 'Tailwind CSS',
     question: 'How do responsive prefixes work in Tailwind?',
-    answer: 'Responsive prefixes like sm:, md:, lg:, xl:, and 2xl: prepend utilities to apply them at specific breakpoints and above, following a mobile-first approach. Unprefixed utilities apply to all screen sizes, and prefixed ones override at larger viewports. Default breakpoints are sm:640px, md:768px, lg:1024px, xl:1280px, and 2xl:1536px, customizable in the config. Stack prefixes with state variants like md:hover:bg-blue-700. In a real app, class="flex flex-col md:flex-row" stacks items vertically on mobile and horizontally on tablets and up.',
+    answer: 'Responsive prefixes like sm:, md:, lg:, xl:, and 2xl: prepend utilities to apply them at specific breakpoints and above, following a mobile-first approach. Unprefixed utilities apply to all screen sizes, and prefixed ones override at larger viewports. Default breakpoints are sm:640px, md:768px, lg:1024px, xl:1280px, and 2xl:1536px, customizable in the config. Stack prefixes with state variants like md:hover:bg-blue-700.',
     code: `<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
   <div class="p-4 text-sm md:text-base lg:text-lg">
     Responsive card
@@ -101,7 +101,7 @@ export default { darkMode: 'class' };
     id: 58,
     category: 'Tailwind CSS',
     question: 'What are component extraction patterns in Tailwind?',
-    answer: 'Component extraction pulls repeated utility combinations into reusable abstractions without losing Tailwind\'s benefits. Common patterns include React/Vue components with className props, @apply in CSS layers, and libraries like tailwind-variants or cva for variant management. The key is extracting structure and repeated patterns while keeping one-off styles as inline utilities. Over-extraction into CSS classes reintroduces the naming problem Tailwind avoids. In a real app, a <Button variant="primary" size="md"> component encapsulates utility strings while pages still use raw utilities for layout.',
+    answer: 'Component extraction pulls repeated utility combinations into reusable abstractions without losing Tailwind\'s benefits. Common patterns include React/Vue components with className props, @apply in CSS layers, and libraries like tailwind-variants or cva for variant management. The key is extracting structure and repeated patterns while keeping one-off styles as inline utilities. Over-extraction into CSS classes reintroduces the naming problem Tailwind avoids.',
     code: `// Component extraction with variants (cva pattern)
 const buttonVariants = cva(
   'inline-flex items-center justify-center rounded-md font-medium',
@@ -124,7 +124,7 @@ const buttonVariants = cva(
     id: 59,
     category: 'Tailwind CSS',
     question: 'How does Tailwind CSS compare to CSS Modules?',
-    answer: 'CSS Modules scope styles to components via hashed class names, keeping traditional CSS syntax with colocated .module.css files. Tailwind applies utility classes directly in markup without separate stylesheets for most styling needs. CSS Modules excel when you need complex, unique styles that are awkward as utilities. Tailwind excels for rapid prototyping, consistent design tokens, and avoiding unused CSS. Many teams use both — Tailwind for layout and common patterns, CSS Modules for complex animations or third-party overrides. In a real app, page layout uses Tailwind utilities while a Chart component uses CSS Modules for intricate SVG styling.',
+    answer: 'CSS Modules scope styles to components via hashed class names, keeping traditional CSS syntax with colocated .module.css files. Tailwind applies utility classes directly in markup without separate stylesheets for most styling needs. CSS Modules excel when you need complex, unique styles that are awkward as utilities. Tailwind excels for rapid prototyping, consistent design tokens, and avoiding unused CSS. Many teams use both — Tailwind for layout and common patterns, CSS Modules for complex animations or third-party overrides.',
     code: `/* CSS Modules: Chart.module.css */
 .chartTooltip {
   background: rgba(0, 0, 0, 0.8);
@@ -143,7 +143,7 @@ import styles from './Chart.module.css';
     id: 60,
     category: 'Tailwind CSS',
     question: 'What is the content configuration for purging unused CSS?',
-    answer: 'The content array in tailwind.config.js specifies file globs Tailwind scans to detect which utility classes are used. Only classes found in those files appear in the production CSS output, keeping bundles tiny. Missing a path means classes in those files get purged, causing missing styles in production. Include all template files — HTML, JSX, TSX, Vue, Svelte, and even MDX. In a real app, forgetting to add ./components/**/*.tsx to content causes buttons to lose their bg-brand styling in production while looking fine in development.',
+    answer: 'The content array in tailwind.config.js specifies file globs Tailwind scans to detect which utility classes are used. Only classes found in those files appear in the production CSS output, keeping bundles tiny. Missing a path means classes in those files get purged, causing missing styles in production. Include all template files — HTML, JSX, TSX, Vue, Svelte, and even MDX.',
     code: `// tailwind.config.js
 export default {
   content: [
@@ -158,7 +158,7 @@ export default {
     id: 61,
     category: 'Tailwind CSS',
     question: 'How do Tailwind plugins extend the framework?',
-    answer: 'Plugins add new utilities, components, base styles, or variants through a functional API in the config plugins array. Official plugins include @tailwindcss/forms (better form defaults), @tailwindcss/typography (prose class for rich text), and @tailwindcss/container-queries. Custom plugins use addUtilities, addComponents, and addBase to register new CSS. Plugins keep the core framework lean while enabling opt-in features. In a real app, @tailwindcss/typography adds a prose class that beautifully styles markdown blog content without writing dozens of custom rules.',
+    answer: 'Plugins add new utilities, components, base styles, or variants through a functional API in the config plugins array. Official plugins include @tailwindcss/forms (better form defaults), @tailwindcss/typography (prose class for rich text), and @tailwindcss/container-queries. Custom plugins use addUtilities, addComponents, and addBase to register new CSS. Plugins keep the core framework lean while enabling opt-in features.',
     code: `// tailwind.config.js
 import typography from '@tailwindcss/typography';
 import forms from '@tailwindcss/forms';
@@ -177,7 +177,7 @@ export default {
     id: 62,
     category: 'Tailwind CSS',
     question: 'What are @layer directives in Tailwind?',
-    answer: '@layer organizes custom CSS into three categories — base, components, and utilities — that Tailwind processes in the correct order respecting specificity. Base layer holds resets and element defaults, components layer holds reusable classes via @apply, and utilities layer holds custom utilities. This ensures custom styles do not accidentally override Tailwind utilities due to source order issues. In a real app, @layer base { h1 { @apply text-2xl font-bold; } } sets global heading styles below utility specificity.',
+    answer: '@layer organizes custom CSS into three categories — base, components, and utilities — that Tailwind processes in the correct order respecting specificity. Base layer holds resets and element defaults, components layer holds reusable classes via @apply, and utilities layer holds custom utilities. This ensures custom styles do not accidentally override Tailwind utilities due to source order issues.',
     code: `/* styles/globals.css */
 @tailwind base;
 @tailwind components;
@@ -196,7 +196,7 @@ export default {
     id: 63,
     category: 'Tailwind CSS',
     question: 'What are arbitrary values in Tailwind?',
-    answer: 'Arbitrary values let you use one-off CSS values not in the default theme by wrapping them in square brackets. Syntax like w-[300px], bg-[#1da1f2], grid-cols-[1fr_500px_2fr], and top-[117px] generates utilities on the fly via JIT. Arbitrary properties extend this to any CSS property: [mask-type:luminance]. Use arbitrary values sparingly — repeated values should become theme tokens in the config. In a real app, h-[calc(100vh-64px)] sets a sidebar height accounting for a fixed header without adding a custom utility to the config.',
+    answer: 'Arbitrary values let you use one-off CSS values not in the default theme by wrapping them in square brackets. Syntax like w-[300px], bg-[#1da1f2], grid-cols-[1fr_500px_2fr], and top-[117px] generates utilities on the fly via JIT. Arbitrary properties extend this to any CSS property: [mask-type:luminance]. Use arbitrary values sparingly — repeated values should become theme tokens in the config.',
     code: `<!-- Arbitrary values for one-off needs -->
 <div class="w-[300px] h-[calc(100vh-64px)] bg-[#f0f4ff]">
   Sidebar
@@ -211,7 +211,7 @@ export default {
     id: 64,
     category: 'Tailwind CSS',
     question: 'How do you implement design tokens with Tailwind?',
-    answer: 'Design tokens map to the theme section of tailwind.config.js, extending colors, spacing, fontSize, borderRadius, and other scales with semantic names. Instead of bg-blue-500, tokens like bg-brand-primary communicate intent and enable systematic theming. Tools like Tailwind CSS v4 CSS-first configuration define tokens as CSS custom properties in @theme. Token-driven configs make rebranding a config change instead of a find-and-replace across files. In a real app, theme.extend.colors.semantic.success: \'#059669\' creates bg-semantic-success used by every success alert.',
+    answer: 'Design tokens map to the theme section of tailwind.config.js, extending colors, spacing, fontSize, borderRadius, and other scales with semantic names. Instead of bg-blue-500, tokens like bg-brand-primary communicate intent and enable systematic theming. Tools like Tailwind CSS v4 CSS-first configuration define tokens as CSS custom properties in @theme. Token-driven configs make rebranding a config change instead of a find-and-replace across files.',
     code: `// tailwind.config.js — design tokens
 theme: {
   extend: {
@@ -232,7 +232,7 @@ theme: {
     id: 65,
     category: 'Tailwind CSS',
     question: 'What is Tailwind Preflight?',
-    answer: 'Preflight is Tailwind\'s opinionated CSS reset built on modern-normalize that removes inconsistent default browser styles. It strips margins from headings, makes images block-level, removes default list styles, and sets border-box on all elements. Preflight injects in the base layer when you include @tailwind base in your CSS entry. It creates a clean, predictable foundation so utilities behave consistently across browsers. In a real app, without Preflight an h1 might have wildly different sizes in Chrome vs Safari, but Preflight normalizes them so text-2xl always wins.',
+    answer: 'Preflight is Tailwind\'s opinionated CSS reset built on modern-normalize that removes inconsistent default browser styles. It strips margins from headings, makes images block-level, removes default list styles, and sets border-box on all elements. Preflight injects in the base layer when you include @tailwind base in your CSS entry. It creates a clean, predictable foundation so utilities behave consistently across browsers.',
     code: `/* Preflight runs automatically with @tailwind base */
 /* Key resets: */
 /* - box-sizing: border-box on all elements */
@@ -248,7 +248,7 @@ theme: {
     id: 66,
     category: 'Tailwind CSS',
     question: 'How do state variants work in Tailwind?',
-    answer: 'State variants prefix utilities to apply styles on interaction or element states — hover:, focus:, active:, disabled:, focus-visible:, and group-hover: for parent-triggered styles. They compose with responsive prefixes: md:hover:bg-blue-700 applies hover styles only on medium screens and up. group and peer classes enable styling children or siblings based on parent/sibling state. In a real app, class="opacity-50 cursor-not-allowed disabled:opacity-50" combined with the disabled attribute visually communicates an inactive button.',
+    answer: 'State variants prefix utilities to apply styles on interaction or element states — hover:, focus:, active:, disabled:, focus-visible:, and group-hover: for parent-triggered styles. They compose with responsive prefixes: md:hover:bg-blue-700 applies hover styles only on medium screens and up. group and peer classes enable styling children or siblings based on parent/sibling state.',
     code: `<button
   class="bg-brand text-white px-4 py-2 rounded-md
          hover:bg-brand-dark
@@ -264,7 +264,7 @@ theme: {
     id: 67,
     category: 'Tailwind CSS',
     question: 'How do container queries work in Tailwind?',
-    answer: 'Container queries let components respond to their parent container\'s width instead of the viewport, using the @container class on the parent and @sm:, @md:, @lg: prefixes on child utilities. The @tailwindcss/container-queries plugin (now built into Tailwind v4) enables this pattern. Container queries solve the problem of reusable components that need different layouts depending on where they are placed, not the screen size. In a real app, a Card component uses @md:flex-row to switch from stacked to horizontal layout when its container is wide enough, regardless of viewport width.',
+    answer: 'Container queries let components respond to their parent container\'s width instead of the viewport, using the @container class on the parent and @sm:, @md:, @lg: prefixes on child utilities. The @tailwindcss/container-queries plugin (now built into Tailwind v4) enables this pattern. Container queries solve the problem of reusable components that need different layouts depending on where they are placed, not the screen size.',
     code: `<!-- Parent marked as container -->
 <div class="@container">
   <div class="flex flex-col @md:flex-row @md:gap-6">
@@ -279,7 +279,7 @@ theme: {
     id: 68,
     category: 'Tailwind CSS',
     question: 'How do you use Tailwind CSS with React?',
-    answer: 'Install tailwindcss, postcss, and autoprefixer, configure content paths to scan JSX/TSX files, and import the generated CSS in your app entry. Apply utilities via className on JSX elements. For dynamic classes, use clsx or cn (clsx + tailwind-merge) to conditionally compose and deduplicate conflicting utilities. Avoid string interpolation for full class names — Tailwind\'s scanner needs complete class strings visible in source code. In a real app, className={cn(\'px-4 py-2 rounded\', isActive && \'bg-brand\', isDisabled && \'opacity-50\')} safely merges button states.',
+    answer: 'Install tailwindcss, postcss, and autoprefixer, configure content paths to scan JSX/TSX files, and import the generated CSS in your app entry. Apply utilities via className on JSX elements. For dynamic classes, use clsx or cn (clsx + tailwind-merge) to conditionally compose and deduplicate conflicting utilities. Avoid string interpolation for full class names — Tailwind\'s scanner needs complete class strings visible in source code.',
     code: `import { cn } from '@/lib/utils';
 
 function Button({ variant, disabled, children }) {
@@ -302,7 +302,7 @@ function Button({ variant, disabled, children }) {
     id: 69,
     category: 'Tailwind CSS',
     question: 'What is tailwind-merge and why is it needed?',
-    answer: 'tailwind-merge intelligently merges Tailwind class strings, resolving conflicts by keeping the last conflicting utility — unlike string concatenation which leaves both p-2 and p-4 active with unpredictable results. It understands Tailwind\'s class groups so px-4 py-2 merged with p-6 correctly produces p-6. Combined with clsx in a cn helper, it is the standard pattern for conditional classes in component libraries. Without it, overriding a component\'s default padding via className prop often fails silently. In a real app, cn(\'p-2\', className) lets consumers override padding by passing p-6 in className.',
+    answer: 'tailwind-merge intelligently merges Tailwind class strings, resolving conflicts by keeping the last conflicting utility — unlike string concatenation which leaves both p-2 and p-4 active with unpredictable results. It understands Tailwind\'s class groups so px-4 py-2 merged with p-6 correctly produces p-6. Combined with clsx in a cn helper, it is the standard pattern for conditional classes in component libraries. Without it, overriding a component\'s default padding via className prop often fails silently.',
     code: `import { clsx } from 'clsx';
 import { twMerge } from 'tailwind-merge';
 
@@ -317,7 +317,7 @@ export function cn(...inputs) {
     id: 70,
     category: 'Tailwind CSS',
     question: 'What is the clsx/cn pattern in Tailwind projects?',
-    answer: 'clsx conditionally constructs className strings from strings, objects, and arrays, filtering out falsy values. The cn utility combines clsx with tailwind-merge for conditional composition with conflict resolution. This pattern is standard in shadcn/ui and most Tailwind component libraries. It replaces template literal concatenation which cannot resolve Tailwind conflicts. Every shadcn/ui component uses cn to merge default styles with consumer overrides. In a real app, cn(baseStyles, variantStyles[variant], className) cleanly handles defaults, variants, and prop overrides in one expression.',
+    answer: 'clsx conditionally constructs className strings from strings, objects, and arrays, filtering out falsy values. The cn utility combines clsx with tailwind-merge for conditional composition with conflict resolution. This pattern is standard in shadcn/ui and most Tailwind component libraries. It replaces template literal concatenation which cannot resolve Tailwind conflicts. Every shadcn/ui component uses cn to merge default styles with consumer overrides.',
     code: `const alertVariants = {
   info: 'bg-blue-50 text-blue-800 border-blue-200',
   error: 'bg-red-50 text-red-800 border-red-200',
@@ -339,7 +339,7 @@ function Alert({ variant = 'info', className, children }) {
     id: 71,
     category: 'Tailwind CSS',
     question: 'How do component libraries like shadcn/ui use Tailwind?',
-    answer: 'shadcn/ui copies component source code into your project rather than installing a package, using Tailwind utilities and CSS variables for theming. Components are built on Radix UI primitives for accessibility with Tailwind styling via the cn helper and cva for variants. The approach gives full ownership — you can modify any component file directly. CSS variables defined in globals.css enable theming without config changes. In a real app, running npx shadcn@latest add button copies a Button.tsx into components/ui/ that you customize freely while keeping Tailwind utility patterns.',
+    answer: 'shadcn/ui copies component source code into your project rather than installing a package, using Tailwind utilities and CSS variables for theming. Components are built on Radix UI primitives for accessibility with Tailwind styling via the cn helper and cva for variants. The approach gives full ownership — you can modify any component file directly. CSS variables defined in globals.css enable theming without config changes.',
     code: `// components/ui/button.tsx (shadcn/ui pattern)
 const buttonVariants = cva(
   'inline-flex items-center justify-center rounded-md text-sm font-medium',

@@ -5,7 +5,7 @@ export const typographyQuestions: InterviewQuestion[] = [
     id: 40,
     category: 'Typography & Visual',
     question: 'How do font-family stacks work and why use them?',
-    answer: 'A font-family stack is an ordered list of typefaces where the browser uses the first font that is installed on the user\'s system or successfully loaded via @font-face. You should always end the stack with a generic family keyword like sans-serif, serif, or monospace so text still renders if every named font fails. Generic keywords map to the user\'s OS defaults, which keeps typography readable across platforms. In a real app, a stack like "Inter", system-ui, sans-serif delivers your brand font when available and gracefully falls back to the native UI font on older devices.',
+    answer: 'A font-family stack is an ordered list of typefaces where the browser uses the first font that is installed on the user\'s system or successfully loaded via @font-face. You should always end the stack with a generic family keyword like sans-serif, serif, or monospace so text still renders if every named font fails. Generic keywords map to the user\'s OS defaults, which keeps typography readable across platforms.',
     code: `body {
   font-family: "Inter", system-ui, -apple-system,
     "Segoe UI", Roboto, sans-serif;
@@ -20,7 +20,7 @@ code, pre {
     id: 41,
     category: 'Typography & Visual',
     question: 'How do you load custom web fonts with @font-face?',
-    answer: '@font-face declares a custom font resource the browser can download and use like a locally installed typeface. You specify src with modern WOFF2 first for best compression, then older formats as fallbacks, and optionally define font-weight and font-style so one family name can cover multiple files. Without @font-face, the browser only uses fonts already on the device or generic families. In a real app, self-hosting via @font-face gives you full control over licensing, caching, and privacy compared to loading fonts from a third-party CDN.',
+    answer: '@font-face declares a custom font resource the browser can download and use like a locally installed typeface. You specify src with modern WOFF2 first for best compression, then older formats as fallbacks, and optionally define font-weight and font-style so one family name can cover multiple files. Without @font-face, the browser only uses fonts already on the device or generic families.',
     code: `@font-face {
   font-family: "Brand Sans";
   src: url("/fonts/brand-sans.woff2") format("woff2"),
@@ -38,7 +38,7 @@ h1 {
     id: 42,
     category: 'Typography & Visual',
     question: 'What does the font-display property control?',
-    answer: 'font-display tells the browser how to render text while a web font is still downloading, trading off between invisible text, flash of unstyled text (FOUT), and layout shift. swap shows fallback text immediately and swaps to the web font once loaded, which is the most common choice for body copy. optional gives the browser permission to skip the web font entirely on slow connections if it would delay rendering. In a real app, using font-display: swap on heading fonts keeps content readable during load while optional works well for decorative display faces that are not critical to UX.',
+    answer: 'font-display tells the browser how to render text while a web font is still downloading, trading off between invisible text, flash of unstyled text (FOUT), and layout shift. swap shows fallback text immediately and swaps to the web font once loaded, which is the most common choice for body copy. optional gives the browser permission to skip the web font entirely on slow connections if it would delay rendering.',
     code: `@font-face {
   font-family: "Display Serif";
   src: url("/fonts/display-serif.woff2") format("woff2");
@@ -53,7 +53,7 @@ h1 {
     id: 43,
     category: 'Typography & Visual',
     question: 'How does line-height affect typography and layout?',
-    answer: 'line-height sets the vertical space each line of text occupies, controlling readability and the rhythm between lines in a block of copy. It is a unitless multiplier relative to the element\'s font-size, so line-height: 1.5 on 16px text yields 24px line boxes. Values that are too tight make descenders collide with ascenders on the next line, while values that are too loose waste space and weaken visual grouping. In a real app, body text often uses 1.5–1.7 for comfortable reading, while tight headings might use 1.1–1.3 to keep multi-line titles visually compact.',
+    answer: 'line-height sets the vertical space each line of text occupies, controlling readability and the rhythm between lines in a block of copy. It is a unitless multiplier relative to the element\'s font-size, so line-height: 1.5 on 16px text yields 24px line boxes. Values that are too tight make descenders collide with ascenders on the next line, while values that are too loose waste space and weaken visual grouping.',
     code: `p {
   font-size: 1rem;
   line-height: 1.6; /* unitless — scales with font-size */
@@ -69,7 +69,7 @@ h2 {
     id: 44,
     category: 'Typography & Visual',
     question: 'What is letter-spacing and when should you adjust it?',
-    answer: 'letter-spacing (also called tracking) adds or removes space between individual characters without changing the font itself. Positive values improve legibility in all-caps labels and small button text where default spacing feels cramped. Negative values can tighten large display headings so they feel more cohesive, but over-tightening hurts readability in body copy. In a real app, a navigation bar with uppercase 12px labels often gets letter-spacing: 0.05em to prevent letters from visually merging together.',
+    answer: 'letter-spacing (also called tracking) adds or removes space between individual characters without changing the font itself. Positive values improve legibility in all-caps labels and small button text where default spacing feels cramped. Negative values can tighten large display headings so they feel more cohesive, but over-tightening hurts readability in body copy.',
     code: `.nav-link {
   font-size: 0.75rem;
   text-transform: uppercase;
@@ -85,7 +85,7 @@ h2 {
     id: 45,
     category: 'Typography & Visual',
     question: 'What are the differences between hex, hsl, and oklch color formats?',
-    answer: 'Hex (#rrggbb) is compact and universally supported but hard to adjust programmatically because it encodes RGB channels in hexadecimal. HSL (hue, saturation, lightness) is more intuitive for designers — you can lighten a brand color by increasing L without touching hue. OKLCH is a perceptually uniform space where equal lightness steps look equally different to the human eye, making accessible contrast tuning and gradient interpolation more predictable. In a real app, you might define design tokens in OKLCH so dark-mode variants preserve the same perceived brightness as light-mode counterparts.',
+    answer: 'Hex (#rrggbb) is compact and universally supported but hard to adjust programmatically because it encodes RGB channels in hexadecimal. HSL (hue, saturation, lightness) is more intuitive for designers — you can lighten a brand color by increasing L without touching hue. OKLCH is a perceptually uniform space where equal lightness steps look equally different to the human eye, making accessible contrast tuning and gradient interpolation more predictable.',
     code: `:root {
   --brand-hex: #3b82f6;
   --brand-hsl: hsl(217 91% 60%);
@@ -104,7 +104,7 @@ h2 {
     id: 46,
     category: 'Typography & Visual',
     question: 'How do CSS gradients work?',
-    answer: 'CSS gradients are image values generated by the browser — they are not standalone color properties but can be used anywhere an image is accepted, such as background-image or border-image. linear-gradient creates a transition along a direction or angle, while radial-gradient radiates from a center point. You can stack multiple color stops and combine gradients with background-size for patterns like striped progress bars. In a real app, a hero section might use a linear-gradient overlay on a photo to ensure white headline text stays readable regardless of the underlying image brightness.',
+    answer: 'CSS gradients are image values generated by the browser — they are not standalone color properties but can be used anywhere an image is accepted, such as background-image or border-image. linear-gradient creates a transition along a direction or angle, while radial-gradient radiates from a center point. You can stack multiple color stops and combine gradients with background-size for patterns like striped progress bars.',
     code: `.hero {
   background:
     linear-gradient(
@@ -128,7 +128,7 @@ h2 {
     id: 47,
     category: 'Typography & Visual',
     question: 'How does box-shadow create depth and elevation?',
-    answer: 'box-shadow draws one or more shadows outside (or inset inside) an element\'s border box without affecting layout or triggering reflow. Each shadow accepts horizontal offset, vertical offset, blur radius, spread radius, and color — comma-separated values stack multiple layers. Soft, large blurs with low opacity mimic ambient light and create a floating card effect, while tight shadows suggest a pressed button. In a real app, a design system might define elevation tokens like shadow-sm, shadow-md, and shadow-lg using layered box-shadow values to keep depth consistent across modals, dropdowns, and cards.',
+    answer: 'box-shadow draws one or more shadows outside (or inset inside) an element\'s border box without affecting layout or triggering reflow. Each shadow accepts horizontal offset, vertical offset, blur radius, spread radius, and color — comma-separated values stack multiple layers. Soft, large blurs with low opacity mimic ambient light and create a floating card effect, while tight shadows suggest a pressed button.',
     code: `.card {
   box-shadow:
     0 1px 2px rgb(0 0 0 / 0.06),
@@ -149,7 +149,7 @@ h2 {
     id: 48,
     category: 'Typography & Visual',
     question: 'What can you do with border-radius beyond simple rounding?',
-    answer: 'border-radius controls the curvature of an element\'s corners, and each corner can be set independently using slash syntax for elliptical radii. A single value like 9999px or 50% on equal width and height creates perfect circles and pill-shaped buttons. Percentage values are relative to the element\'s own dimensions, so the same 50% radius looks different on a wide rectangle versus a square. In a real app, you might combine border-radius with overflow: hidden on an avatar wrapper to clip a square image into a circle without editing the image file.',
+    answer: 'border-radius controls the curvature of an element\'s corners, and each corner can be set independently using slash syntax for elliptical radii. A single value like 9999px or 50% on equal width and height creates perfect circles and pill-shaped buttons. Percentage values are relative to the element\'s own dimensions, so the same 50% radius looks different on a wide rectangle versus a square.',
     code: `.avatar {
   width: 48px;
   height: 48px;
@@ -170,7 +170,7 @@ h2 {
     id: 49,
     category: 'Typography & Visual',
     question: 'What is backdrop-filter and how is it used?',
-    answer: 'backdrop-filter applies visual effects like blur, brightness, or saturation to the content behind an element, creating frosted-glass or dimmed-overlay effects. Unlike filter, which affects the element itself, backdrop-filter processes whatever is rendered underneath — typically combined with a semi-transparent background color. It requires the element to be at least partially transparent, and support varies slightly across browsers for some filter functions. In a real app, a sticky navigation bar with backdrop-filter: blur(12px) and a translucent background keeps page content subtly visible while scrolling, giving a modern iOS-style glass effect.',
+    answer: 'backdrop-filter applies visual effects like blur, brightness, or saturation to the content behind an element, creating frosted-glass or dimmed-overlay effects. Unlike filter, which affects the element itself, backdrop-filter processes whatever is rendered underneath — typically combined with a semi-transparent background color. It requires the element to be at least partially transparent, and support varies slightly across browsers for some filter functions.',
     code: `.glass-nav {
   position: sticky;
   top: 0;

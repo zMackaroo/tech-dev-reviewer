@@ -5,7 +5,7 @@ export const storybookQuestions: InterviewQuestion[] = [
     id: 16,
     category: 'Storybook',
     question: 'What is Storybook?',
-    answer: 'Storybook is an open-source tool for developing, documenting, and testing UI components in isolation outside the main application. Each component gets "stories" that render it in different states — default, loading, error, disabled — without navigating through your full app. Designers, developers, and QA can review components interactively in a dedicated environment. Storybook integrates with frameworks like React, Vue, Angular, and Svelte. In a real app, you develop a DatePicker in Storybook with stories for every locale and validation state before plugging it into the checkout flow.',
+    answer: 'Storybook is an open-source tool for developing, documenting, and testing UI components in isolation outside the main application. Each component gets "stories" that render it in different states — default, loading, error, disabled — without navigating through your full app. Designers, developers, and QA can review components interactively in a dedicated environment. Storybook integrates with frameworks like React, Vue, Angular, and Svelte.',
     code: `// .storybook/main.ts
 export default {
   stories: ['../src/**/*.stories.@(ts|tsx)'],
@@ -17,7 +17,7 @@ export default {
     id: 17,
     category: 'Storybook',
     question: 'What is the Component Story Format (CSF)?',
-    answer: 'CSF is Storybook\'s standard file format for defining stories using plain JavaScript or TypeScript module exports. A default export defines metadata about the component (title, component reference, decorators), and named exports define individual stories. CSF replaced the older storiesOf API with a cleaner, more tooling-friendly syntax that supports hot reloading and TypeScript inference. Each named export becomes a story in the Storybook sidebar. In a real app, Button.stories.tsx exports Primary, Secondary, and Disabled stories that render the same Button component with different args.',
+    answer: 'CSF is Storybook\'s standard file format for defining stories using plain JavaScript or TypeScript module exports. A default export defines metadata about the component (title, component reference, decorators), and named exports define individual stories. CSF replaced the older storiesOf API with a cleaner, more tooling-friendly syntax that supports hot reloading and TypeScript inference. Each named export becomes a story in the Storybook sidebar.',
     code: `// Button.stories.tsx (CSF 3)
 import type { Meta, StoryObj } from '@storybook/react';
 import { Button } from './Button';
@@ -38,7 +38,7 @@ export const Primary: Story = {
     id: 18,
     category: 'Storybook',
     question: 'What are Meta and Story objects in CSF 3?',
-    answer: 'The Meta object (default export) configures shared settings for all stories in a file: title, component, parameters, decorators, and argTypes. Each Story object (named export) defines a specific rendered state using args, render functions, and story-level overrides. TypeScript generics like Meta<typeof Button> and StoryObj<typeof Button> provide autocomplete for props. This separation keeps configuration DRY while letting individual stories customize behavior. In a real app, meta sets the title to Components/Input while stories export Default, WithError, and Disabled with different args.',
+    answer: 'The Meta object (default export) configures shared settings for all stories in a file: title, component, parameters, decorators, and argTypes. Each Story object (named export) defines a specific rendered state using args, render functions, and story-level overrides. TypeScript generics like Meta<typeof Button> and StoryObj<typeof Button> provide autocomplete for props. This separation keeps configuration DRY while letting individual stories customize behavior.',
     code: `const meta: Meta<typeof Input> = {
   title: 'Components/Input',
   component: Input,
@@ -58,7 +58,7 @@ export const WithError: Story = {
     id: 19,
     category: 'Storybook',
     question: 'What are args and controls in Storybook?',
-    answer: 'Args are the props passed to a component in a story, defined inline in the story object or inherited from meta defaults. Controls automatically generate an interactive UI panel from argTypes, letting you toggle booleans, pick colors, and edit strings without changing code. When you adjust a control, Storybook re-renders the story with updated args in real time. This makes Storybook a live playground for exploring component APIs. In a real app, a Card story with args for title, imageUrl, and variant lets a designer test every combination without asking a developer to change code.',
+    answer: 'Args are the props passed to a component in a story, defined inline in the story object or inherited from meta defaults. Controls automatically generate an interactive UI panel from argTypes, letting you toggle booleans, pick colors, and edit strings without changing code. When you adjust a control, Storybook re-renders the story with updated args in real time. This makes Storybook a live playground for exploring component APIs.',
     code: `export const Playground: Story = {
   args: {
     title: 'Product Name',
@@ -80,7 +80,7 @@ argTypes: {
     id: 20,
     category: 'Storybook',
     question: 'What are decorators in Storybook?',
-    answer: 'Decorators are wrapper functions that surround a story\'s rendered output to provide context like themes, routers, or padding. Global decorators in preview.ts apply to every story, while story-level decorators target specific cases. A common pattern wraps stories in a ThemeProvider or MemoryRouter so components render with the same context they expect in production. Decorators receive the story component and return JSX that includes it. In a real app, a global decorator wraps all stories in your design system ThemeProvider so buttons and inputs always use the correct brand colors.',
+    answer: 'Decorators are wrapper functions that surround a story\'s rendered output to provide context like themes, routers, or padding. Global decorators in preview.ts apply to every story, while story-level decorators target specific cases. A common pattern wraps stories in a ThemeProvider or MemoryRouter so components render with the same context they expect in production. Decorators receive the story component and return JSX that includes it.',
     code: `// .storybook/preview.tsx — global decorator
 import { ThemeProvider } from '@company/design-system';
 
@@ -103,7 +103,7 @@ export const InSidebar: Story = {
     id: 21,
     category: 'Storybook',
     question: 'How do you write documentation with MDX in Storybook?',
-    answer: 'MDX files combine Markdown prose with embedded Storybook stories and components, letting you write rich documentation pages alongside live examples. You import Meta and Story blocks from @storybook/blocks to embed stories directly in the docs narrative. MDX docs pages appear in the Storybook sidebar under the Docs tab for each component. This keeps documentation co-located with stories so examples never drift from the actual component. In a real app, Button.docs.mdx might explain accessibility guidelines in prose and embed the Primary and Disabled stories as interactive examples.',
+    answer: 'MDX files combine Markdown prose with embedded Storybook stories and components, letting you write rich documentation pages alongside live examples. You import Meta and Story blocks from @storybook/blocks to embed stories directly in the docs narrative. MDX docs pages appear in the Storybook sidebar under the Docs tab for each component. This keeps documentation co-located with stories so examples never drift from the actual component.',
     code: `// Button.docs.mdx
 import { Meta, Story, Canvas } from '@storybook/blocks';
 import * as ButtonStories from './Button.stories';
@@ -124,7 +124,7 @@ Use buttons for user actions. Limit one primary button per view.
     id: 22,
     category: 'Storybook',
     question: 'What are Storybook addons?',
-    answer: 'Addons extend Storybook with extra panels, toolbars, and features beyond basic story rendering. Popular addons include essentials (controls, actions, docs), a11y (accessibility auditing), interactions (testing user flows), and viewport (responsive preview). Addons register in main.ts and can add toolbar icons, panel tabs, or decorators. The addon ecosystem covers design tokens, Figma integration, and performance profiling. In a real app, enabling @storybook/addon-a11y runs automated accessibility checks on every story and flags missing labels or insufficient color contrast.',
+    answer: 'Addons extend Storybook with extra panels, toolbars, and features beyond basic story rendering. Popular addons include essentials (controls, actions, docs), a11y (accessibility auditing), interactions (testing user flows), and viewport (responsive preview). Addons register in main.ts and can add toolbar icons, panel tabs, or decorators. The addon ecosystem covers design tokens, Figma integration, and performance profiling.',
     code: `// .storybook/main.ts
 export default {
   addons: [
@@ -139,7 +139,7 @@ export default {
     id: 23,
     category: 'Storybook',
     question: 'What is the Actions addon in Storybook?',
-    answer: 'The Actions addon logs event handler calls in a dedicated panel so you can verify callbacks fire with the correct arguments without wiring up a full app. When a component calls onClick, onChange, or custom handlers, Storybook captures the event name and payload in the Actions tab. You can use the fn() helper from @storybook/test to create mock functions with built-in action logging. This is especially useful for presentational components where you want to confirm behavior without a real backend. In a real app, clicking a Modal\'s onClose button in Storybook logs the action so you verify the handler signature before integration.',
+    answer: 'The Actions addon logs event handler calls in a dedicated panel so you can verify callbacks fire with the correct arguments without wiring up a full app. When a component calls onClick, onChange, or custom handlers, Storybook captures the event name and payload in the Actions tab. You can use the fn() helper from @storybook/test to create mock functions with built-in action logging. This is especially useful for presentational components where you want to confirm behavior without a real backend.',
     code: `import { fn } from '@storybook/test';
 import { Modal } from './Modal';
 
@@ -156,7 +156,7 @@ export const Default: Story = {
     id: 24,
     category: 'Storybook',
     question: 'How does visual testing work with Storybook and Chromatic?',
-    answer: 'Visual testing captures screenshots of every story and compares them against approved baselines to detect unintended UI changes. Chromatic is a cloud service built by the Storybook team that runs visual diffs on every pull request. When a developer changes a Button component, Chromatic flags stories where pixels differ from the baseline for human review. Approved changes become the new baseline. This catches CSS regressions that unit tests miss. In a real app, a PR that accidentally removes a button\'s border-radius triggers a Chromatic diff on all Button stories, blocking merge until reviewed.',
+    answer: 'Visual testing captures screenshots of every story and compares them against approved baselines to detect unintended UI changes. Chromatic is a cloud service built by the Storybook team that runs visual diffs on every pull request. When a developer changes a Button component, Chromatic flags stories where pixels differ from the baseline for human review. Approved changes become the new baseline. This catches CSS regressions that unit tests miss.',
     code: `// CI pipeline (GitHub Actions example)
 // - name: Publish to Chromatic
 //   run: npx chromatic --project-token=\${CHROMATIC_TOKEN}
@@ -171,7 +171,7 @@ export const Default: Story = {
     id: 25,
     category: 'Storybook',
     question: 'How do you publish and share Storybook?',
-    answer: 'Storybook builds to a static site using storybook build, outputting HTML, JS, and CSS that can be hosted anywhere. Common hosting targets include Chromatic, Netlify, Vercel, GitHub Pages, and internal S3 buckets. Published Storybook becomes a living component catalog that designers and PMs browse without cloning the repo. CI pipelines rebuild and deploy on every merge to keep the catalog current. In a real app, pushing to main triggers a GitHub Action that runs storybook build and deploys to https://design-system.company.com for the whole organization.',
+    answer: 'Storybook builds to a static site using storybook build, outputting HTML, JS, and CSS that can be hosted anywhere. Common hosting targets include Chromatic, Netlify, Vercel, GitHub Pages, and internal S3 buckets. Published Storybook becomes a living component catalog that designers and PMs browse without cloning the repo. CI pipelines rebuild and deploy on every merge to keep the catalog current.',
     code: `// package.json scripts
 {
   "storybook": "storybook dev -p 6006",
@@ -186,7 +186,7 @@ export const Default: Story = {
     id: 26,
     category: 'Storybook',
     question: 'What is story composition in Storybook?',
-    answer: 'Story composition lets one Storybook instance embed stories from another Storybook deployment via a remote URL, useful for monorepos or federated design systems. A host Storybook references remote stories so you browse components from multiple packages in one sidebar. This avoids rebuilding all stories locally when working on a single package. Composition is configured in main.ts with refs pointing to published Storybook URLs. In a real app, the main product Storybook composes stories from @company/ui and @company/icons packages hosted on separate Chromatic projects.',
+    answer: 'Story composition lets one Storybook instance embed stories from another Storybook deployment via a remote URL, useful for monorepos or federated design systems. A host Storybook references remote stories so you browse components from multiple packages in one sidebar. This avoids rebuilding all stories locally when working on a single package. Composition is configured in main.ts with refs pointing to published Storybook URLs.',
     code: `// .storybook/main.ts
 export default {
   refs: {
@@ -205,7 +205,7 @@ export default {
     id: 27,
     category: 'Storybook',
     question: 'What are play functions in Storybook?',
-    answer: 'Play functions are async functions attached to stories that simulate user interactions after the story renders, enabling interaction testing in the browser. They use testing-library queries and userEvent to click, type, and navigate like a real user. Play functions run automatically in the Interactions panel and can assert expected outcomes with expect from @storybook/test. This bridges the gap between visual documentation and automated testing without a separate test file. In a real app, a LoginForm story play function types credentials, clicks submit, and asserts a success message appears.',
+    answer: 'Play functions are async functions attached to stories that simulate user interactions after the story renders, enabling interaction testing in the browser. They use testing-library queries and userEvent to click, type, and navigate like a real user. Play functions run automatically in the Interactions panel and can assert expected outcomes with expect from @storybook/test. This bridges the gap between visual documentation and automated testing without a separate test file.',
     code: `import { expect, userEvent, within } from '@storybook/test';
 
 export const SuccessfulLogin: Story = {
@@ -222,7 +222,7 @@ export const SuccessfulLogin: Story = {
     id: 28,
     category: 'Storybook',
     question: 'What is Autodocs in Storybook?',
-    answer: 'Autodocs automatically generates documentation pages from component metadata, args, and TypeScript prop types without writing MDX manually. Enable it by setting tags: [\'autodocs\'] in the meta object or configuring docs.autodocs in preview.ts. The generated page includes a props table, controls, and all exported stories embedded as live examples. Autodocs works best when components have well-typed props and descriptive argTypes. In a real app, adding autodocs to your Card component instantly produces a docs page listing title, variant, and children props with type information pulled from TypeScript.',
+    answer: 'Autodocs automatically generates documentation pages from component metadata, args, and TypeScript prop types without writing MDX manually. Enable it by setting tags: [\'autodocs\'] in the meta object or configuring docs.autodocs in preview.ts. The generated page includes a props table, controls, and all exported stories embedded as live examples. Autodocs works best when components have well-typed props and descriptive argTypes.',
     code: `const meta: Meta<typeof Card> = {
   title: 'Components/Card',
   component: Card,
@@ -241,7 +241,7 @@ export default meta;`,
     id: 29,
     category: 'Storybook',
     question: 'How do you configure Storybook for a React project?',
-    answer: 'Initialize Storybook with npx storybook@latest init, which detects your framework and installs the matching preset like @storybook/react-vite. The .storybook/main.ts file configures story globs, addons, and the framework builder. preview.ts sets global parameters, decorators, and default args shared across all stories. Stories live alongside components as *.stories.tsx files. In a real app, a Vite + React + TypeScript project gets Storybook configured to share the same vite.config.ts aliases and CSS imports as the main app.',
+    answer: 'Initialize Storybook with npx storybook@latest init, which detects your framework and installs the matching preset like @storybook/react-vite. The .storybook/main.ts file configures story globs, addons, and the framework builder. preview.ts sets global parameters, decorators, and default args shared across all stories. Stories live alongside components as *.stories.tsx files.',
     code: `// .storybook/main.ts
 import type { StorybookConfig } from '@storybook/react-vite';
 
@@ -256,7 +256,7 @@ export default config;`,
     id: 30,
     category: 'Storybook',
     question: 'What are parameters in Storybook?',
-    answer: 'Parameters are static metadata that configure story behavior, addon settings, and layout without affecting component props. Common parameters include layout (centered, fullscreen, padded), backgrounds (surface colors for preview), and docs settings. Global parameters in preview.ts apply to all stories; meta and story objects can override them. Parameters keep configuration separate from args so you do not pollute component props with Storybook-specific values. In a real app, setting parameters: { layout: \'fullscreen\' } on a Header story renders it edge-to-edge instead of in a centered box.',
+    answer: 'Parameters are static metadata that configure story behavior, addon settings, and layout without affecting component props. Common parameters include layout (centered, fullscreen, padded), backgrounds (surface colors for preview), and docs settings. Global parameters in preview.ts apply to all stories; meta and story objects can override them. Parameters keep configuration separate from args so you do not pollute component props with Storybook-specific values.',
     code: `// Global default in preview.ts
 export const parameters = {
   layout: 'centered',
@@ -278,7 +278,7 @@ export const FullPage: Story = {
     id: 31,
     category: 'Storybook',
     question: 'How do you integrate Storybook into CI pipelines?',
-    answer: 'CI integration typically runs three checks: build-storybook to verify stories compile, test-runner or interaction tests for behavior, and Chromatic for visual regression. Failing any check blocks the pull request. Caching node_modules and Storybook\'s build cache speeds up CI runs. Static builds also serve as deployable artifacts for design review. In a real app, every PR runs npx storybook build to catch broken imports and npx test-storybook to verify play functions pass before merge.',
+    answer: 'CI integration typically runs three checks: build-storybook to verify stories compile, test-runner or interaction tests for behavior, and Chromatic for visual regression. Failing any check blocks the pull request. Caching node_modules and Storybook\'s build cache speeds up CI runs. Static builds also serve as deployable artifacts for design review.',
     code: `# .github/workflows/storybook.yml
 # - run: npm ci
 # - run: npm run build-storybook
@@ -292,7 +292,7 @@ export const FullPage: Story = {
     id: 32,
     category: 'Storybook',
     question: 'What is interaction testing in Storybook?',
-    answer: 'Interaction testing validates that components respond correctly to user input by running play functions and asserting DOM state in a real browser environment. The Interactions panel shows each step — click, type, assert — with pass/fail status and debuggable traces. Unlike unit tests in JSDOM, interaction tests render the full component with real CSS and event handling. The test-runner addon executes all play functions headlessly in CI. In a real app, a Dropdown story play function opens the menu, selects an option, and asserts the label updates — catching bugs where keyboard navigation breaks.',
+    answer: 'Interaction testing validates that components respond correctly to user input by running play functions and asserting DOM state in a real browser environment. The Interactions panel shows each step — click, type, assert — with pass/fail status and debuggable traces. Unlike unit tests in JSDOM, interaction tests render the full component with real CSS and event handling. The test-runner addon executes all play functions headlessly in CI.',
     code: `export const SelectOption: Story = {
   args: { options: ['Apple', 'Banana', 'Cherry'] },
   play: async ({ canvasElement }) => {
@@ -307,7 +307,7 @@ export const FullPage: Story = {
     id: 33,
     category: 'Storybook',
     question: 'What are argTypes in Storybook?',
-    answer: 'ArgTypes define how each component prop appears and behaves in the Controls panel and docs props table. You can set control types (boolean, select, color, text), default values, descriptions, and conditional visibility. Storybook auto-generates argTypes from TypeScript prop types, but manual argTypes add select options, disable controls for callback props, and write human-readable descriptions. Well-configured argTypes make Storybook self-documenting for designers and QA. In a real app, argTypes on a Badge component might offer a select control for variant with options info, success, warning, and error.',
+    answer: 'ArgTypes define how each component prop appears and behaves in the Controls panel and docs props table. You can set control types (boolean, select, color, text), default values, descriptions, and conditional visibility. Storybook auto-generates argTypes from TypeScript prop types, but manual argTypes add select options, disable controls for callback props, and write human-readable descriptions. Well-configured argTypes make Storybook self-documenting for designers and QA.',
     code: `const meta: Meta<typeof Badge> = {
   component: Badge,
   argTypes: {

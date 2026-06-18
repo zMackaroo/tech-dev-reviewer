@@ -16,7 +16,7 @@ console.log(Number("42")); // 42`,
     id: 17,
     category: 'Types & Coercion',
     question: 'What is the output of [] + [] and [] + {}?',
-    answer: 'When + is used with arrays or objects, JavaScript converts operands to strings using toString(). An empty array [] becomes an empty string "", so [] + [] evaluates to "" + "" which is "". An empty object {} becomes "[object Object]", so [] + {} is "" + "[object Object]" which is "[object Object]". These surprising results illustrate why implicit coercion makes + dangerous with mixed types. In a real app, this is why you should never rely on + for combining unknown values—use explicit Number(), String(), or template literals instead.',
+    answer: 'When + is used with arrays or objects, JavaScript converts operands to strings using toString(). An empty array [] becomes an empty string "", so [] + [] evaluates to "" + "" which is "". An empty object {} becomes "[object Object]", so [] + {} is "" + "[object Object]" which is "[object Object]". These surprising results illustrate why implicit coercion makes + dangerous with mixed types.',
     code: `console.log([] + []);
 console.log([] + {});
 console.log({} + []); // in expression context
@@ -27,7 +27,7 @@ console.log(true + true);`,
     id: 18,
     category: 'Types & Coercion',
     question: 'What is the difference between implicit and explicit coercion?',
-    answer: 'Implicit coercion is automatic conversion performed by JavaScript when an operation needs a different type, such as multiplying two numeric strings with *. Explicit coercion is when you deliberately convert using String(x), Number(x), parseInt(x, 10), or similar APIs. Implicit coercion is convenient but harder to predict; explicit conversion makes intent clear to readers and static analysis tools. For example, validating a query parameter with Number(params.page) is safer than assuming "5" * "2" style coercion will always behave as you expect.',
+    answer: 'Implicit coercion is automatic conversion performed by JavaScript when an operation needs a different type, such as multiplying two numeric strings with *. Explicit coercion is when you deliberately convert using String(x), Number(x), parseInt(x, 10), or similar APIs. Implicit coercion is convenient but harder to predict; explicit conversion makes intent clear to readers and static analysis tools.',
     code: `// Implicit
 console.log("5" * "2"); // 10
 
@@ -41,7 +41,7 @@ console.log(parseInt("42px")); // 42`,
     id: 19,
     category: 'Types & Coercion',
     question: 'How does the + operator work with mixed types?',
-    answer: 'The + operator is overloaded in JavaScript: if either operand is a string, it performs string concatenation after coercing the other operand to a string. If both operands are numbers (or coercible to numbers without string involvement), it performs addition. This asymmetry is why "5" + 3 gives "53" but "5" - 3 gives 2, since subtraction always prefers numbers. In a real app, always convert user input with Number() or parseInt before adding quantities, or you might accidentally build "2" + "3" = "23" instead of 5.',
+    answer: 'The + operator is overloaded in JavaScript: if either operand is a string, it performs string concatenation after coercing the other operand to a string. If both operands are numbers (or coercible to numbers without string involvement), it performs addition. This asymmetry is why "5" + 3 gives "53" but "5" - 3 gives 2, since subtraction always prefers numbers.',
     code: `console.log(1 + 2);       // 3
 console.log("1" + 2);     // "12"
 console.log(1 + "2");     // "12"
@@ -53,7 +53,7 @@ console.log("1" + true);  // "1true"`,
     id: 20,
     category: 'Types & Coercion',
     question: 'What is Symbol and when would you use it?',
-    answer: 'Symbol is a primitive type that creates guaranteed-unique values, even when two symbols share the same description string. They are commonly used as object property keys that will not collide with other keys or user-provided field names. Well-known symbols like Symbol.iterator define hooks for language features such as for...of loops. For example, a library might attach metadata to DOM nodes with a Symbol key so it does not clash with properties the application or other libraries set on the same object.',
+    answer: 'Symbol is a primitive type that creates guaranteed-unique values, even when two symbols share the same description string. They are commonly used as object property keys that will not collide with other keys or user-provided field names. Well-known symbols like Symbol.iterator define hooks for language features such as for...of loops.',
     code: `const id1 = Symbol("id");
 const id2 = Symbol("id");
 console.log(id1 === id2); // false — always unique
@@ -66,7 +66,7 @@ console.log(user[id1]); // 123`,
     id: 21,
     category: 'Types & Coercion',
     question: 'What is BigInt and how is it different from Number?',
-    answer: 'BigInt represents integers of arbitrary precision, unlike Number which loses accuracy beyond Number.MAX_SAFE_INTEGER (2^53 - 1). You create BigInt values with the n suffix (9007199254740991n) or the BigInt() constructor. BigInt and Number cannot be mixed in arithmetic without explicit conversion—you must choose one type for the operation. In a real app, BigInt is essential for financial ledgers, large IDs from databases, or cryptography where losing precision with regular numbers would corrupt calculations.',
+    answer: 'BigInt represents integers of arbitrary precision, unlike Number which loses accuracy beyond Number.MAX_SAFE_INTEGER (2^53 - 1). You create BigInt values with the n suffix (9007199254740991n) or the BigInt() constructor. BigInt and Number cannot be mixed in arithmetic without explicit conversion—you must choose one type for the operation.',
     code: `const big = 9007199254740991n;
 const bigger = big + 1n;
 console.log(bigger.toString());
@@ -77,7 +77,7 @@ console.log(Number.MAX_SAFE_INTEGER); // 9007199254740991`,
     id: 22,
     category: 'Types & Coercion',
     question: 'What is the difference between shallow and deep copy?',
-    answer: 'A shallow copy duplicates only the top level of an object; nested objects and arrays still share references with the original. A deep copy recursively clones every nested level so changes to the copy do not affect the original at any depth. Spread syntax ({ ...obj }) and Object.assign() are shallow; structuredClone() or custom recursive functions provide deep copies. In a real app, when you duplicate user settings before editing a draft form, a shallow copy is enough for flat data, but nested address objects need structuredClone to avoid mutating the saved profile.',
+    answer: 'A shallow copy duplicates only the top level of an object; nested objects and arrays still share references with the original. A deep copy recursively clones every nested level so changes to the copy do not affect the original at any depth. Spread syntax ({ ...obj }) and Object.assign() are shallow; structuredClone() or custom recursive functions provide deep copies.',
     code: `const original = { a: 1, nested: { b: 2 } };
 const shallow = { ...original };
 shallow.nested.b = 99;
@@ -92,7 +92,7 @@ console.log(original.nested.b); // 99 — unchanged`,
     id: 23,
     category: 'Types & Coercion',
     question: 'What are the limitations of JSON.parse/stringify for cloning?',
-    answer: 'JSON.parse(JSON.stringify(obj)) is a quick deep-copy hack but drops or transforms many JavaScript types. Functions, undefined, and Symbol properties are omitted; Date becomes an ISO string; Map, Set, and circular references break or fail entirely. structuredClone() handles most built-in types and cycles but still cannot clone functions. In a real app, never use JSON cloning to duplicate class instances or objects with methods—you will lose behavior and get plain data objects instead.',
+    answer: 'JSON.parse(JSON.stringify(obj)) is a quick deep-copy hack but drops or transforms many JavaScript types. Functions, undefined, and Symbol properties are omitted; Date becomes an ISO string; Map, Set, and circular references break or fail entirely. structuredClone() handles most built-in types and cycles but still cannot clone functions.',
     code: `const obj = {
   date: new Date(),
   fn: () => {},
@@ -107,7 +107,7 @@ console.log(typeof cloned.date); // "string"`,
     id: 24,
     category: 'Types & Coercion',
     question: 'What is Object.is() and how does it differ from ===?',
-    answer: 'Object.is() compares two values like === but handles two edge cases differently. Object.is(NaN, NaN) returns true, while NaN === NaN is false; Object.is(+0, -0) returns false, while 0 === -0 is true. Most everyday comparisons still use ===, but Object.is is useful in libraries implementing precise equality or Map-like structures. For example, a cache keyed by values including NaN would need Object.is to treat NaN keys as matching correctly.',
+    answer: 'Object.is() compares two values like === but handles two edge cases differently. Object.is(NaN, NaN) returns true, while NaN === NaN is false; Object.is(+0, -0) returns false, while 0 === -0 is true. Most everyday comparisons still use ===, but Object.is is useful in libraries implementing precise equality or Map-like structures.',
     code: `console.log(NaN === NaN);           // false
 console.log(Object.is(NaN, NaN));   // true
 console.log(0 === -0);              // true
@@ -118,7 +118,7 @@ console.log(Object.is(0, -0));      // false`,
     id: 25,
     category: 'Types & Coercion',
     question: 'What is the difference between undefined and undeclared variables?',
-    answer: 'An undefined variable has been declared with let, const, or var but not yet assigned a value, so reading it returns undefined. An undeclared variable was never defined in scope, and accessing it throws a ReferenceError in strict mode (or creates an accidental global in sloppy mode). This distinction matters when debugging typos versus missing initialization. For example, console.log(userName) when userName was never declared throws ReferenceError, but let userName; console.log(userName) safely logs undefined.',
+    answer: 'An undefined variable has been declared with let, const, or var but not yet assigned a value, so reading it returns undefined. An undeclared variable was never defined in scope, and accessing it throws a ReferenceError in strict mode (or creates an accidental global in sloppy mode). This distinction matters when debugging typos versus missing initialization.',
     code: `let declared;
 console.log(declared); // undefined
 
@@ -133,7 +133,7 @@ try {
     id: 26,
     category: 'Types & Coercion',
     question: 'How do you check if a value is an array?',
-    answer: 'Array.isArray(value) is the reliable standard way to check whether a value is an array. typeof returns "object" for arrays, which cannot distinguish arrays from plain objects. instanceof Array works in most cases but fails across different JavaScript realms such as iframes. In a real app, when normalizing API data that could be a single item or a list, use Array.isArray(payload) before calling .map() to avoid runtime errors.',
+    answer: 'Array.isArray(value) is the reliable standard way to check whether a value is an array. typeof returns "object" for arrays, which cannot distinguish arrays from plain objects. instanceof Array works in most cases but fails across different JavaScript realms such as iframes.',
     code: `const arr = [1, 2, 3];
 console.log(Array.isArray(arr));     // true
 console.log(typeof arr);             // "object"
@@ -144,7 +144,7 @@ console.log(arr instanceof Array);   // true`,
     id: 27,
     category: 'Types & Coercion',
     question: 'What is optional chaining (?.)?',
-    answer: 'Optional chaining (?.) safely accesses nested properties, methods, or array elements when the left side might be null or undefined. If any part of the chain is nullish, the expression short-circuits and returns undefined instead of throwing a TypeError. It replaces verbose patterns like user && user.profile && user.profile.name. In a real app, user?.address?.zipCode gracefully returns undefined for users without an address instead of crashing your render when loading partial profile data from an API.',
+    answer: 'Optional chaining (?.) safely accesses nested properties, methods, or array elements when the left side might be null or undefined. If any part of the chain is nullish, the expression short-circuits and returns undefined instead of throwing a TypeError. It replaces verbose patterns like user && user.profile && user.profile.name.',
     code: `const user = { profile: { name: "Alice" } };
 console.log(user?.profile?.name);  // "Alice"
 console.log(user?.address?.city);  // undefined

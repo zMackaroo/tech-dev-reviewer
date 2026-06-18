@@ -5,7 +5,7 @@ export const apiMiddlewareQuestions: InterviewQuestion[] = [
     id: 62,
     category: 'API & Middleware',
     question: 'What are Route Handlers in the Next.js App Router?',
-    answer: 'Route Handlers are functions exported from route.ts files inside the app directory that define HTTP API endpoints, replacing the Pages Router\'s pages/api pattern. They support standard Web Request and Response objects and export named functions for HTTP methods like GET, POST, PUT, and DELETE. Route Handlers can run on the Edge or Node.js runtime and participate in caching when using GET with appropriate cache headers. For example, app/api/users/route.ts exporting async function GET() serves JSON at /api/users. In a real app, a mobile client might call /api/webhooks/stripe as a Route Handler to receive payment events while your Next.js frontend uses Server Actions for form mutations instead.',
+    answer: 'Route Handlers are functions exported from route.ts files inside the app directory that define HTTP API endpoints, replacing the Pages Router\'s pages/api pattern. They support standard Web Request and Response objects and export named functions for HTTP methods like GET, POST, PUT, and DELETE. Route Handlers can run on the Edge or Node.js runtime and participate in caching when using GET with appropriate cache headers.',
     code: `// app/api/users/route.ts
 import { NextResponse } from 'next/server';
 
@@ -24,7 +24,7 @@ export async function POST(request: Request) {
     id: 63,
     category: 'API & Middleware',
     question: 'How do GET and POST Route Handlers work in Next.js?',
-    answer: 'Route Handlers map HTTP verbs to exported async functions in a route.ts file—GET handles read requests and POST handles create or action requests, each receiving a Request object and returning a Response or NextResponse. GET handlers can be statically cached at build time if they do not read dynamic data, while POST handlers are always dynamic. You parse JSON with await request.json(), read query params from new URL(request.url).searchParams, and set status codes on the response. For example, GET /api/products returns a list while POST /api/products creates a new record from the request body. In a real app, a search autocomplete endpoint uses GET with ?q= query params and a checkout endpoint uses POST with a cart payload validated on the server.',
+    answer: 'Route Handlers map HTTP verbs to exported async functions in a route.ts file—GET handles read requests and POST handles create or action requests, each receiving a Request object and returning a Response or NextResponse. GET handlers can be statically cached at build time if they do not read dynamic data, while POST handlers are always dynamic. You parse JSON with await request.json(), read query params from new URL(request.url).searchParams, and set status codes on the response.',
     code: `// app/api/products/route.ts
 import { NextResponse } from 'next/server';
 
@@ -45,7 +45,7 @@ export async function POST(request: Request) {
     id: 64,
     category: 'API & Middleware',
     question: 'What is middleware.ts in Next.js and what does it do?',
-    answer: 'middleware.ts is a file placed at the project root (or src root) that runs before a request is completed, letting you intercept every matching route to rewrite, redirect, modify headers, or check authentication. It executes on the Edge runtime for low latency and runs before static files, pages, and Route Handlers are served. The middleware function receives a NextRequest and returns a NextResponse, or nothing to continue the request unchanged. For example, middleware can read a session cookie and redirect unauthenticated users away from /dashboard routes. In a real app, middleware adds a correlation ID header to every incoming request so downstream logs can be traced across services.',
+    answer: 'middleware.ts is a file placed at the project root (or src root) that runs before a request is completed, letting you intercept every matching route to rewrite, redirect, modify headers, or check authentication. It executes on the Edge runtime for low latency and runs before static files, pages, and Route Handlers are served. The middleware function receives a NextRequest and returns a NextResponse, or nothing to continue the request unchanged.',
     code: `// middleware.ts (project or src root)
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
@@ -64,7 +64,7 @@ export function middleware(request: NextRequest) {
     id: 65,
     category: 'API & Middleware',
     question: 'How does the middleware matcher config work?',
-    answer: 'The matcher export in middleware.ts defines which paths trigger your middleware, using string patterns or regular expressions to include or exclude routes efficiently. Without a matcher, middleware runs on every request including static assets, which adds unnecessary overhead. Patterns support dynamic segments like /dashboard/:path* and negative lookahead to skip _next/static or image files. For example, matcher: ["/dashboard/:path*", "/admin/:path*"] limits middleware to protected areas only. In a real app, you exclude api/webhooks from auth middleware so Stripe can POST without a session cookie while still guarding all /app routes.',
+    answer: 'The matcher export in middleware.ts defines which paths trigger your middleware, using string patterns or regular expressions to include or exclude routes efficiently. Without a matcher, middleware runs on every request including static assets, which adds unnecessary overhead. Patterns support dynamic segments like /dashboard/:path* and negative lookahead to skip _next/static or image files.',
     code: `// middleware.ts
 export const config = {
   matcher: [
@@ -80,7 +80,7 @@ export const config = {
     id: 66,
     category: 'API & Middleware',
     question: 'How do you perform redirects in Next.js middleware?',
-    answer: 'In middleware you create a redirect with NextResponse.redirect(url) where url is an absolute URL, typically built from request.url as the base. Redirects run before the page renders, so they are ideal for auth gates, locale detection, and canonical URL enforcement with zero flash of unauthorized content. You can also use NextResponse.rewrite for internal proxying that keeps the browser URL unchanged. For example, redirecting users without a valid token from /settings to /login happens entirely in middleware before any server component runs. In a real app, middleware reads Accept-Language and redirects visitors from / to /en or /fr before the homepage renders.',
+    answer: 'In middleware you create a redirect with NextResponse.redirect(url) where url is an absolute URL, typically built from request.url as the base. Redirects run before the page renders, so they are ideal for auth gates, locale detection, and canonical URL enforcement with zero flash of unauthorized content. You can also use NextResponse.rewrite for internal proxying that keeps the browser URL unchanged.',
     code: `import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 
@@ -107,7 +107,7 @@ export function middleware(request: NextRequest) {
     id: 67,
     category: 'API & Middleware',
     question: 'How do you handle authentication in Next.js middleware?',
-    answer: 'Authentication in middleware typically reads a session token from cookies or headers, validates it (often via JWT decode or a fast edge-compatible check), and redirects or rewrites before protected routes render. Middleware is the first gate—it should do lightweight verification and defer full session lookups to Server Components or Route Handlers when needed. You can also attach user info to request headers via NextResponse.next({ request: { headers } }) for downstream server code to read. For example, middleware checks for a session cookie and redirects to /login if missing on /dashboard paths. In a real app, middleware validates a signed JWT, sets x-user-id on the request, and server components read that header to fetch user-specific data without re-parsing the token.',
+    answer: 'Authentication in middleware typically reads a session token from cookies or headers, validates it (often via JWT decode or a fast edge-compatible check), and redirects or rewrites before protected routes render. Middleware is the first gate—it should do lightweight verification and defer full session lookups to Server Components or Route Handlers when needed. You can also attach user info to request headers via NextResponse.next({ request: { headers } }) for downstream server code to read.',
     code: `import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 import { verifyToken } from '@/lib/auth-edge';
@@ -132,7 +132,7 @@ export async function middleware(request: NextRequest) {
     id: 68,
     category: 'API & Middleware',
     question: 'Why does Next.js middleware run on the Edge runtime?',
-    answer: 'Middleware runs on the Edge runtime because it executes on every matched request and must add minimal latency—Edge isolates start faster and run geographically close to the user on platforms like Vercel. The Edge constraint is acceptable for middleware tasks like cookie checks, redirects, and header rewrites that do not need full Node.js APIs. Heavy work like database queries or file I/O belongs in Server Components or Route Handlers on Node.js instead. For example, a simple JWT expiry check in middleware completes in milliseconds at the edge before the request reaches your origin server. In a real app, middleware at the edge blocks bot traffic by checking User-Agent patterns globally without loading your Node.js server for every rejected request.',
+    answer: 'Middleware runs on the Edge runtime because it executes on every matched request and must add minimal latency—Edge isolates start faster and run geographically close to the user on platforms like Vercel. The Edge constraint is acceptable for middleware tasks like cookie checks, redirects, and header rewrites that do not need full Node.js APIs. Heavy work like database queries or file I/O belongs in Server Components or Route Handlers on Node.js instead.',
     code: `// middleware.ts always runs on Edge — no export needed
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
@@ -153,7 +153,7 @@ export const config = { matcher: '/:path*' };`,
     id: 69,
     category: 'API & Middleware',
     question: 'How do you read and set cookies and headers in Next.js server code?',
-    answer: 'In Server Components and Server Actions, use cookies() and headers() from next/headers to read incoming request data—these are async in Next.js 15 and dynamic, so they opt the route into dynamic rendering. In Route Handlers and middleware, use request.cookies and request.headers on the Request object, and set response cookies via NextResponse with cookies.set(). Server-side cookie access keeps secrets off the client and lets you gate content per session. For example, cookies().get("theme") in a layout reads the user\'s theme preference on the server to render the correct class on the html element. In a real app, a Server Action sets an httpOnly session cookie after login while middleware reads it on subsequent requests to protect routes.',
+    answer: 'In Server Components and Server Actions, use cookies() and headers() from next/headers to read incoming request data—these are async in Next.js 15 and dynamic, so they opt the route into dynamic rendering. In Route Handlers and middleware, use request.cookies and request.headers on the Request object, and set response cookies via NextResponse with cookies.set(). Server-side cookie access keeps secrets off the client and lets you gate content per session.',
     code: `// Server Component — read cookies/headers
 import { cookies, headers } from 'next/headers';
 
@@ -176,7 +176,7 @@ export async function POST() {
     id: 70,
     category: 'API & Middleware',
     question: 'What is the difference between rewrite and redirect in Next.js?',
-    answer: 'A redirect (NextResponse.redirect or redirect() from next/navigation) sends an HTTP 3xx response that changes the URL visible in the browser, telling the client to make a new request to the target path. A rewrite (NextResponse.rewrite or next.config.js rewrites) proxies the request internally to a different path while the browser URL stays the same, useful for masking implementation details or routing to external services. Redirects are appropriate for auth flows and canonical URLs; rewrites are appropriate for serving content from another path or backend transparently. For example, redirect unauthenticated users from /admin to /login so the URL reflects where they are. In a real app, rewrite /docs/* to a hosted documentation site so users see yourdomain.com/docs while content is served from docs.yourdomain.com.',
+    answer: 'A redirect (NextResponse.redirect or redirect() from next/navigation) sends an HTTP 3xx response that changes the URL visible in the browser, telling the client to make a new request to the target path. A rewrite (NextResponse.rewrite or next.config.js rewrites) proxies the request internally to a different path while the browser URL stays the same, useful for masking implementation details or routing to external services. Redirects are appropriate for auth flows and canonical URLs; rewrites are appropriate for serving content from another path or backend transparently.',
     code: `// middleware.ts — redirect (browser URL changes)
 return NextResponse.redirect(new URL('/login', request.url));
 
@@ -192,7 +192,7 @@ return NextResponse.rewrite(new URL('/internal/dashboard', request.url));
     id: 71,
     category: 'API & Middleware',
     question: 'When should you use Route Handlers versus Server Actions?',
-    answer: 'Server Actions are best for mutations and form submissions from your Next.js UI—they integrate with revalidation, progressive enhancement, and React form state without you building REST endpoints manually. Route Handlers are best when you need a traditional HTTP API consumed by external clients, webhooks, mobile apps, or third-party services that expect standard REST endpoints. Server Actions are not a general-purpose public API because they use a special protocol tied to your Next.js app. For example, use a Server Action for an in-app "Save profile" button but a Route Handler POST /api/webhooks/github for GitHub event delivery. In a real app, the React frontend calls createInvoice as a Server Action while the finance team\'s external tooling hits /api/invoices with an API key through a Route Handler.',
+    answer: 'Server Actions are best for mutations and form submissions from your Next.js UI—they integrate with revalidation, progressive enhancement, and React form state without you building REST endpoints manually. Route Handlers are best when you need a traditional HTTP API consumed by external clients, webhooks, mobile apps, or third-party services that expect standard REST endpoints. Server Actions are not a general-purpose public API because they use a special protocol tied to your Next.js app.',
     code: `// Server Action — for your Next.js UI mutations
 'use server';
 export async function createInvoice(formData: FormData) {

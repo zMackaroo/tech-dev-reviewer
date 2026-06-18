@@ -5,7 +5,7 @@ export const tablesListsQuestions: InterviewQuestion[] = [
     id: 75,
     category: 'Tables & Lists',
     question: 'What is the purpose of thead and tbody in HTML tables?',
-    answer: 'thead and tbody divide a table into header and body sections, improving semantics, accessibility, and styling hooks. thead contains header rows with column labels, while tbody holds the data rows. Browsers can repeat thead rows when printing long tables and screen readers use the structure for navigation. For example, a financial report puts Month and Revenue in thead and quarterly figures in tbody. In a real app, CSS targets tbody tr:nth-child(even) for zebra striping without affecting header rows.',
+    answer: 'thead and tbody divide a table into header and body sections, improving semantics, accessibility, and styling hooks. thead contains header rows with column labels, while tbody holds the data rows. Browsers can repeat thead rows when printing long tables and screen readers use the structure for navigation.',
     code: `<table>
   <caption>Monthly Revenue</caption>
   <thead>
@@ -30,7 +30,7 @@ export const tablesListsQuestions: InterviewQuestion[] = [
     id: 76,
     category: 'Tables & Lists',
     question: 'What does the scope attribute on th elements do?',
-    answer: 'The scope attribute on th tells assistive technologies whether a header cell applies to its column (scope="col"), row (scope="row"), column group, or row group. This association helps screen readers read "Revenue, $42,000" instead of disconnected cell values. For simple tables, scope is the preferred way to link headers to data cells. For example, a row header th scope="row" labels the data cells in that row. In a real app, data dashboards export HTML tables with proper scope so accessibility audits pass without complex headers/id wiring.',
+    answer: 'The scope attribute on th tells assistive technologies whether a header cell applies to its column (scope="col"), row (scope="row"), column group, or row group. This association helps screen readers read "Revenue, $42,000" instead of disconnected cell values. For simple tables, scope is the preferred way to link headers to data cells.',
     code: `<table>
   <thead>
     <tr>
@@ -57,7 +57,7 @@ export const tablesListsQuestions: InterviewQuestion[] = [
     id: 77,
     category: 'Tables & Lists',
     question: 'Why should tables include a caption element?',
-    answer: 'The caption element provides a visible, programmatic title for the table announced by screen readers before navigating cells. It appears above the table by default and describes what the table contains — not just repeating a nearby heading. Captions improve comprehension for all users scanning data-heavy pages. For example, caption "2024 Q1 Sales by Region" is clearer than an untitled grid of numbers. In a real app, report generators include caption text from report metadata so exported HTML tables are self-describing.',
+    answer: 'The caption element provides a visible, programmatic title for the table announced by screen readers before navigating cells. It appears above the table by default and describes what the table contains — not just repeating a nearby heading. Captions improve comprehension for all users scanning data-heavy pages.',
     code: `<table>
   <caption>
     Employee headcount by department, March 2024
@@ -84,7 +84,7 @@ export const tablesListsQuestions: InterviewQuestion[] = [
     id: 78,
     category: 'Tables & Lists',
     question: 'When should you use ul versus ol lists?',
-    answer: 'Use ul for unordered lists where item sequence does not matter, such as feature bullet points or navigation items. Use ol when order is meaningful — step-by-step instructions, rankings, or legal clauses where changing order changes meaning. Both use li children and can be nested for hierarchical outlines. For example, a recipe uses ol for numbered steps and ul for optional garnish ideas. In a real app, documentation sites use ol for tutorials and ul for unrelated feature lists, helping screen readers announce "list of 5 items" with correct ordering context.',
+    answer: 'Use ul for unordered lists where item sequence does not matter, such as feature bullet points or navigation items. Use ol when order is meaningful — step-by-step instructions, rankings, or legal clauses where changing order changes meaning. Both use li children and can be nested for hierarchical outlines.',
     code: `<!-- Unordered: order does not matter -->
 <ul>
   <li>Free shipping</li>
@@ -103,7 +103,7 @@ export const tablesListsQuestions: InterviewQuestion[] = [
     id: 79,
     category: 'Tables & Lists',
     question: 'What is a description list (dl) and when use dt and dd?',
-    answer: 'The dl element is a description list pairing terms (dt) with descriptions (dd), ideal for glossaries, metadata key-value displays, and FAQ-style content. Multiple dd elements can follow one dt, and one dd can relate to several dt terms. Unlike ul/ol, dl has no implied bullet or numbering — semantics are term-definition pairs. For example, a product spec sheet uses dt for "Battery life" and dd for "40 hours". In a real app, profile pages show user metadata with dl instead of misusing tables or div grids for key-value pairs.',
+    answer: 'The dl element is a description list pairing terms (dt) with descriptions (dd), ideal for glossaries, metadata key-value displays, and FAQ-style content. Multiple dd elements can follow one dt, and one dd can relate to several dt terms. Unlike ul/ol, dl has no implied bullet or numbering — semantics are term-definition pairs.',
     code: `<dl>
   <dt>Author</dt>
   <dd>Jane Doe</dd>
@@ -120,7 +120,7 @@ export const tablesListsQuestions: InterviewQuestion[] = [
     id: 80,
     category: 'Tables & Lists',
     question: 'How do nested lists work in HTML?',
-    answer: 'Lists nest by placing a ul or ol inside an li element, creating hierarchical outlines for menus, table of contents, or multi-level navigation. The inner list must be a child of li, not a direct child of ul or ol alongside li elements. CSS styles each nesting level with indentation or different markers. For example, a site nav nests ul inside the "Products" li for subcategories. In a real app, nested lists power documentation sidebars and dropdown menus before JavaScript enhances them with keyboard behavior.',
+    answer: 'Lists nest by placing a ul or ol inside an li element, creating hierarchical outlines for menus, table of contents, or multi-level navigation. The inner list must be a child of li, not a direct child of ul or ol alongside li elements. CSS styles each nesting level with indentation or different markers.',
     code: `<nav aria-label="Site">
   <ul>
     <li><a href="/">Home</a></li>
@@ -139,7 +139,7 @@ export const tablesListsQuestions: InterviewQuestion[] = [
     id: 81,
     category: 'Tables & Lists',
     question: 'What accessibility practices apply specifically to HTML tables?',
-    answer: 'Data tables need th headers, scope or headers/id associations, and caption for context; layout tables should be avoided entirely in favor of CSS grid or flexbox. Do not use tables purely for visual alignment of non-tabular content. Keep tables simple or split complex matrices when possible. For example, a pricing comparison with plan names as column headers and features as row headers uses th scope appropriately. In a real app, accessibility linters flag tables missing th or caption and teams refactor layout tables to semantic div structures with ARIA only when necessary.',
+    answer: 'Data tables need th headers, scope or headers/id associations, and caption for context; layout tables should be avoided entirely in favor of CSS grid or flexbox. Do not use tables purely for visual alignment of non-tabular content. Keep tables simple or split complex matrices when possible.',
     code: `<!-- Accessible data table -->
 <table>
   <caption>Pricing plan comparison</caption>
@@ -168,7 +168,7 @@ export const tablesListsQuestions: InterviewQuestion[] = [
     id: 82,
     category: 'Tables & Lists',
     question: 'What is the tfoot element used for?',
-    answer: 'The tfoot element defines a footer section for a table, typically holding summary rows like totals, averages, or footnotes. It can appear after tbody in markup but browsers render it at the bottom of the table. Like thead, tfoot can repeat on printed pages spanning multiple sheets. For example, a sales table puts Grand Total in a tfoot row spanning columns. In a real app, financial dashboards use tfoot for aggregate calculations while thead labels columns and tbody holds line items.',
+    answer: 'The tfoot element defines a footer section for a table, typically holding summary rows like totals, averages, or footnotes. It can appear after tbody in markup but browsers render it at the bottom of the table. Like thead, tfoot can repeat on printed pages spanning multiple sheets.',
     code: `<table>
   <caption>Invoice #1042</caption>
   <thead>
@@ -202,7 +202,7 @@ export const tablesListsQuestions: InterviewQuestion[] = [
     id: 83,
     category: 'Tables & Lists',
     question: 'How do colspan and rowspan affect table structure?',
-    answer: 'colspan merges a cell across multiple columns and rowspan merges across rows, creating complex table layouts for calendars, schedules, or grouped headers. Accessibility requires that merged cells still make sense to screen readers — headers/id associations become important in complex cases. Overusing merges for layout creates confusing navigation for assistive tech. For example, a timetable uses rowspan="2" on a time slot label spanning two event rows. In a real app, simple colspan for a "No data" message is fine, but heavily merged tables should include headers attributes on td elements.',
+    answer: 'colspan merges a cell across multiple columns and rowspan merges across rows, creating complex table layouts for calendars, schedules, or grouped headers. Accessibility requires that merged cells still make sense to screen readers — headers/id associations become important in complex cases. Overusing merges for layout creates confusing navigation for assistive tech.',
     code: `<table>
   <thead>
     <tr>
@@ -232,7 +232,7 @@ export const tablesListsQuestions: InterviewQuestion[] = [
     id: 84,
     category: 'Tables & Lists',
     question: 'What list-related attributes improve accessibility?',
-    answer: 'Lists themselves carry implicit list semantics, but surrounding context matters: nav should wrap navigation lists, and aria-label distinguishes multiple lists on one page. For ordered lists, the start and reversed attributes control numbering without CSS hacks. Li elements should contain meaningful content, not empty placeholders. For example, aria-label="Table of contents" on nav helps when multiple ol elements appear on a long documentation page. In a real app, breadcrumb lists use nav aria-label="Breadcrumb" with ol and aria-current="page" on the last item.',
+    answer: 'Lists themselves carry implicit list semantics, but surrounding context matters: nav should wrap navigation lists, and aria-label distinguishes multiple lists on one page. For ordered lists, the start and reversed attributes control numbering without CSS hacks. Li elements should contain meaningful content, not empty placeholders.',
     code: `<nav aria-label="Breadcrumb">
   <ol>
     <li><a href="/">Home</a></li>
