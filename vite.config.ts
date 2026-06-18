@@ -1,11 +1,11 @@
-import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react'
+import { defineConfig } from "vite";
+import react from "@vitejs/plugin-react";
 
 // GitHub project pages: https://<user>.github.io/<repo>/
 // Set VITE_BASE_PATH=/ when deploying to a user site (username.github.io repo).
-const base = process.env.VITE_BASE_PATH ?? '/tech-dev-reviewer/'
+const base = "/";
 
 export default defineConfig({
   base,
   plugins: [react()],
-})
+});
